@@ -55,7 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   isLoading: false,
                   user: user,
                   isAuthenticated: true,
-                  apiFailureOrSuccess: none(),
+                  apiFailureOrSuccess: some(result),
                 ),
               );
             },
@@ -85,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   isLoading: false,
                   user: user,
                   isAuthenticated: true,
-                  apiFailureOrSuccess: none(),
+                  apiFailureOrSuccess: some(result),
                 ),
               );
             },

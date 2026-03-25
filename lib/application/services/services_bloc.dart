@@ -43,7 +43,7 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
               state.copyWith(
                 isLoading: false,
                 services: services,
-                apiFailureOrSuccess: none(),
+                apiFailureOrSuccess: some(result),
               ),
             );
           },
@@ -68,7 +68,7 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
               state.copyWith(
                 isLoading: false,
                 serviceDetail: serviceDetail,
-                apiFailureOrSuccess: none(),
+                apiFailureOrSuccess: some(result),
               ),
             );
           },

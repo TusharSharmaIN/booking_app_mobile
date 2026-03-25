@@ -61,7 +61,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
               state.copyWith(
                 isLoading: false,
                 createSuccess: true,
-                apiFailureOrSuccess: none(),
+                apiFailureOrSuccess: some(result),
               ),
             );
           },
@@ -86,7 +86,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
               state.copyWith(
                 isLoading: false,
                 bookings: bookings,
-                apiFailureOrSuccess: none(),
+                apiFailureOrSuccess: some(result),
               ),
             );
           },
