@@ -40,7 +40,7 @@ abstract class BookingDto with _$BookingDto {
     id: booking.id.getOrCrash(),
     userId: booking.userId.getOrCrash(),
     serviceId: booking.serviceId.getOrCrash(),
-    scheduledAt: booking.scheduledAt.getValue(),
+    scheduledAt: booking.scheduledAt.dateTime,
     status: booking.status.getOrCrash(),
     notes: booking.notes.getOrCrash(),
     service: ServiceDto.fromDomain(booking.service),

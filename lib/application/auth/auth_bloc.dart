@@ -25,10 +25,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               emit(state.copyWith(name: StringValue(e.value)));
               break;
             case AuthFieldType.email:
-              emit(state.copyWith(email: StringValue(e.value)));
+              emit(state.copyWith(email: EmailAddress(e.value)));
               break;
             case AuthFieldType.password:
-              emit(state.copyWith(password: StringValue(e.value)));
+              emit(state.copyWith(password: Password.login(e.value)));
               break;
           }
         },

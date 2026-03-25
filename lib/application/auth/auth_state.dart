@@ -7,8 +7,8 @@ abstract class AuthState with _$AuthState {
   const factory AuthState({
     required bool isLoading,
     required StringValue name,
-    required StringValue email,
-    required StringValue password,
+    required EmailAddress email,
+    required Password password,
     required bool isAuthenticated,
     required UserEntity user,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess,
@@ -17,8 +17,8 @@ abstract class AuthState with _$AuthState {
   factory AuthState.initial() => AuthState(
     isLoading: false,
     name: StringValue(''),
-    email: StringValue(''),
-    password: StringValue(''),
+    email: EmailAddress(''),
+    password: Password(''),
     isAuthenticated: false,
     user: UserEntity.empty(),
     apiFailureOrSuccess: none(),

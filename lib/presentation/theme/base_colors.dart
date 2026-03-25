@@ -12,6 +12,8 @@ abstract class BaseColors {
   static const Color grey100 = Color(0xFFF5F5F5);
   static const Color grey200 = Color(0xFFEEEEEE);
   static const Color grey300 = Color(0xFFE0E0E0);
+  static const Color grey400 = Color(0xFFBDBDBD);
+  static const Color grey500 = Color(0xFF9E9E9E);
   static const Color grey50 = Color(0xFFFAFAFA);
   static const Color textGrey700 = Color(0xFF616161);
 

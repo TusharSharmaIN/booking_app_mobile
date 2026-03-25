@@ -1,21 +1,28 @@
-import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:booking_app_mobile/domain/core/error/value_error.dart';
+import 'package:booking_app_mobile/domain/core/error/value_failure.dart';
+import 'package:booking_app_mobile/domain/core/value/value_validator.dart';
 
+@immutable
 abstract class ValueObject<T> {
   const ValueObject();
 
-  Either<Failure, T> get value;
+  Either<ValueFailure<T>, T> get value;
 
+  /// Throws [UnexpectedValueError] containing the [ValueFailure]
   T getOrCrash() {
-    return value.fold((f) => throw UnexpectedValueError(f), (r) => r);
+    return value.fold((f) => throw UnexpectedValueError(f), id);
   }
 
-  T getValue() {
-    return value.fold(
-      (f) =>
-          f as T, // Return raw or mock value conceptually, but mostly users want to just unwrap.
-      (r) => r,
-    );
+  T getOrDefaultValue(T defaultValue) {
+    return value.fold((f) => defaultValue, id);
+  }
+
+  T getValue() => value.fold((f) => f.failedValue, (r) => r);
+
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    return value.fold((l) => left(l), (r) => right(unit));
   }
 
   bool isValid() => value.isRight();
@@ -23,87 +30,136 @@ abstract class ValueObject<T> {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
+
     return other is ValueObject<T> && other.value == value;
   }
 
   @override
   int get hashCode => value.hashCode;
-}
-
-class UnexpectedValueError extends Error {
-  final Failure failure;
-  UnexpectedValueError(this.failure);
 
   @override
-  String toString() {
-    return Error.safeToString(
-      'Encountered a ValueFailure at an unrecoverable point. Terminating. Failure was: $failure',
-    );
-  }
+  String toString() => 'Value($value)';
 }
 
 class StringValue extends ValueObject<String> {
   @override
-  final Either<Failure, String> value;
+  final Either<ValueFailure<String>, String> value;
 
-  // Simple implementation that doesn't actually validate strings (accepts all)
+  factory StringValue(String input) =>
+      StringValue._(validateStringNotEmpty(input));
+
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
+
   const StringValue._(this.value);
-
-  factory StringValue(String input) {
-    return StringValue._(right(input));
-  }
 }
 
-class DateTimeValue extends ValueObject<DateTime> {
+class Password extends ValueObject<String> {
   @override
-  final Either<Failure, DateTime> value;
+  final Either<ValueFailure<String>, String> value;
+
+  factory Password.login(String input) {
+    return Password._(validateStringNotEmpty(input));
+  }
+
+  factory Password.reset(String input) {
+    return Password._(validateStringNotEmpty(input).flatMap(validatePassword));
+  }
+
+  factory Password(String newPassword) {
+    return Password._(
+      validateStringNotEmpty(newPassword)
+          .flatMap(atLeastOneLowerCharacter)
+          .flatMap(atLeastOneUpperCharacter)
+          .flatMap(atLeastOneNumericCharacter)
+          .flatMap(atLeastOneSpecialCharacter)
+          .flatMap((input) => validateStringLength(input, minLength: 8)),
+    );
+  }
+
+  factory Password.confirm(String confirmPassword, String newPassword) {
+    return Password._(
+      validateStringNotEmpty(
+        confirmPassword,
+      ).flatMap((input) => validateNewAndConfirmPassword(input, newPassword)),
+    );
+  }
+
+  const Password._(this.value);
+}
+
+class EmailAddress extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory EmailAddress(String input) {
+    return EmailAddress._(
+      validateStringNotEmpty(input).flatMap(validateEmailAddress),
+    );
+  }
+
+  factory EmailAddress.optional(String input) {
+    return EmailAddress._(
+      (validateStringIsEmpty(
+        input,
+      ).fold((l) => validateEmailAddress(input), (r) => Right(r))),
+    );
+  }
+
+  const EmailAddress._(this.value);
+
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
+}
+
+/// A ValueObject wrapper around an ISO date‑time string.
+class DateTimeValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  /// Pass in an ISO‑8601 string, e.g. “2025-01-01T00:00:00Z”.
+  factory DateTimeValue(String input) {
+    return DateTimeValue._(validateStringNotEmpty(input));
+  }
+
+  /// Create a DateTimeValue from a numeric timestamp string (milliseconds
+  /// since epoch).
+  factory DateTimeValue.fromTimestamp(String input) {
+    return DateTimeValue._(validateTimestampString(input));
+  }
+
+  factory DateTimeValue.fromUnixTimestamp(String input) {
+    return DateTimeValue._(validateUnixTimestampString(input));
+  }
 
   const DateTimeValue._(this.value);
 
-  factory DateTimeValue(String input) {
-    if (input.isEmpty) {
-      return DateTimeValue._(right(DateTime.fromMillisecondsSinceEpoch(0)));
-    }
+  /// Raw parsed DateTime (in local time).
+  DateTime get dateTime => DateTime.parse(
+    value.getOrElse(() => DateTime.now().toIso8601String()),
+  ).toLocal();
 
-    try {
-      final dt = DateTime.parse(input);
-      return DateTimeValue._(right(dt));
-    } catch (_) {
-      // Return a basic failure on parse error or a zero-epoch time
-      return DateTimeValue._(right(DateTime.fromMillisecondsSinceEpoch(0)));
-    }
-  }
-}
-
-class BoolValue extends ValueObject<bool> {
-  @override
-  final Either<Failure, bool> value;
-
-  const BoolValue._(this.value);
-
-  factory BoolValue(bool input) {
-    return BoolValue._(right(input));
-  }
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 }
 
 class IntValue extends ValueObject<int> {
   @override
-  final Either<Failure, int> value;
+  final Either<ValueFailure<int>, int> value;
 
+  factory IntValue(int input) => IntValue._(right(input));
   const IntValue._(this.value);
-
-  factory IntValue(int input) {
-    return IntValue._(right(input));
-  }
 }
 
 class DoubleValue extends ValueObject<double> {
   @override
-  final Either<Failure, double> value;
+  final Either<ValueFailure<double>, double> value;
 
+  factory DoubleValue(double input) => DoubleValue._(right(input));
   const DoubleValue._(this.value);
+}
 
-  factory DoubleValue(double input) {
-    return DoubleValue._(right(input));
-  }
+class BoolValue extends ValueObject<bool> {
+  @override
+  final Either<ValueFailure<bool>, bool> value;
+
+  factory BoolValue(bool input) => BoolValue._(right(input));
+  const BoolValue._(this.value);
 }

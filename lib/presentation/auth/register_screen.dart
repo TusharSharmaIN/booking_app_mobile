@@ -1,0 +1,187 @@
+import 'package:booking_app_mobile/presentation/router/route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:booking_app_mobile/presentation/theme/base_colors.dart';
+import 'package:booking_app_mobile/presentation/theme/base_text_styles.dart';
+import 'package:booking_app_mobile/application/auth/auth_bloc.dart';
+import 'package:booking_app_mobile/presentation/core/custom/custom_text_field.dart';
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: BaseColors.white,
+      body: BlocListener<AuthBloc, AuthState>(
+        listenWhen: (p, c) =>
+            p.apiFailureOrSuccess != c.apiFailureOrSuccess ||
+            p.isAuthenticated != c.isAuthenticated,
+        listener: (context, state) {
+          if (state.isAuthenticated) {
+            context.go(AppRoutes.services);
+            return;
+          }
+
+          state.apiFailureOrSuccess.fold(
+            () {},
+            (either) => either.fold((failure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(failure.message),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }, (_) => context.go(AppRoutes.services)),
+          );
+        },
+        child: const SafeArea(child: _RegisterFormView()),
+      ),
+    );
+  }
+}
+
+class _RegisterFormView extends StatelessWidget {
+  const _RegisterFormView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Create Account',
+              style: BaseTextStyles.poppinsDisplayBold.copyWith(
+                letterSpacing: -1,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Join us to book great services',
+              style: BaseTextStyles.poppinsLargeRegularBold.copyWith(
+                color: BaseColors.grey,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 48),
+            CustomTextField(
+              label: 'Full Name',
+              hint: 'Enter your full name',
+              prefixIcon: Icons.person_outline,
+              onChanged: (value) => context.read<AuthBloc>().add(
+                AuthEvent.onAuthInputFieldChanged(
+                  fieldType: AuthFieldType.name,
+                  value: value,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            CustomTextField(
+              label: 'Email',
+              hint: 'Enter your email',
+              prefixIcon: Icons.email_outlined,
+              keyboardType: TextInputType.emailAddress,
+              onChanged: (value) => context.read<AuthBloc>().add(
+                AuthEvent.onAuthInputFieldChanged(
+                  fieldType: AuthFieldType.email,
+                  value: value,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            CustomTextField(
+              label: 'Password',
+              hint: 'Create a password',
+              prefixIcon: Icons.lock_outline,
+              obscureText: true,
+              onChanged: (value) => context.read<AuthBloc>().add(
+                AuthEvent.onAuthInputFieldChanged(
+                  fieldType: AuthFieldType.password,
+                  value: value,
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+            const RegisterCTA(),
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: () => context.pop(),
+              style: TextButton.styleFrom(
+                foregroundColor: BaseColors.textGrey700,
+              ),
+              child: const Text('Already have an account? Login'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RegisterCTA extends StatelessWidget {
+  const RegisterCTA({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      buildWhen: (previous, current) =>
+          previous.isLoading != current.isLoading ||
+          previous.name != current.name ||
+          previous.email != current.email ||
+          previous.password != current.password,
+      builder: (context, state) {
+        final isLoading = state.isLoading;
+        return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 0,
+            backgroundColor: BaseColors.black,
+            foregroundColor: BaseColors.white,
+          ),
+          onPressed: isLoading
+              ? null
+              : () {
+                  if (!state.name.isValid() ||
+                      !state.email.isValid() ||
+                      !state.password.isValid()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please fill all fields')),
+                    );
+                    return;
+                  }
+                  context.read<AuthBloc>().add(
+                    AuthEvent.registerRequested(
+                      name: state.name.getValue(),
+                      email: state.email.getValue(),
+                      password: state.password.getValue(),
+                    ),
+                  );
+                },
+          child: isLoading
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: BaseColors.white,
+                  ),
+                )
+              : Text(
+                  'Register',
+                  style: BaseTextStyles.poppinsLargeBold.copyWith(
+                    color: BaseColors.white,
+                  ),
+                ),
+        );
+      },
+    );
+  }
+}

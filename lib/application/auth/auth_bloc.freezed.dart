@@ -386,7 +386,7 @@ as String,
 /// @nodoc
 mixin _$AuthState {
 
- bool get isLoading; StringValue get name; StringValue get email; StringValue get password; bool get isAuthenticated; UserEntity get user; Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccess;
+ bool get isLoading; StringValue get name; EmailAddress get email; Password get password; bool get isAuthenticated; UserEntity get user; Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccess;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -417,7 +417,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, StringValue name, StringValue email, StringValue password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
+ bool isLoading, StringValue name, EmailAddress email, Password password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -439,8 +439,8 @@ class _$AuthStateCopyWithImpl<$Res>
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as StringValue,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as StringValue,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as StringValue,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
+as EmailAddress,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as Password,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
 as bool,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as UserEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
 as Option<Either<ApiFailure, dynamic>>,
@@ -537,7 +537,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  EmailAddress email,  Password password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
 return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
@@ -558,7 +558,7 @@ return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  EmailAddress email,  Password password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
 return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
@@ -578,7 +578,7 @@ return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  StringValue name,  EmailAddress email,  Password password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
 return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
@@ -598,8 +598,8 @@ class _AuthState extends AuthState {
 
 @override final  bool isLoading;
 @override final  StringValue name;
-@override final  StringValue email;
-@override final  StringValue password;
+@override final  EmailAddress email;
+@override final  Password password;
 @override final  bool isAuthenticated;
 @override final  UserEntity user;
 @override final  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess;
@@ -634,7 +634,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, StringValue name, StringValue email, StringValue password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
+ bool isLoading, StringValue name, EmailAddress email, Password password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -656,8 +656,8 @@ class __$AuthStateCopyWithImpl<$Res>
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as StringValue,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as StringValue,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as StringValue,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
+as EmailAddress,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as Password,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
 as bool,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as UserEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
 as Option<Either<ApiFailure, dynamic>>,
