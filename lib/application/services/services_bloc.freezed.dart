@@ -278,7 +278,7 @@ as String,
 /// @nodoc
 mixin _$ServicesState {
 
- bool get isLoading; List<ServiceEntity> get services; ServiceEntity get serviceDetail; Option<Either<Failure, dynamic>> get apiFailureOrSuccess;
+ bool get isLoading; List<ServiceEntity> get services; ServiceEntity get serviceDetail; Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccess;
 /// Create a copy of ServicesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -309,7 +309,7 @@ abstract mixin class $ServicesStateCopyWith<$Res>  {
   factory $ServicesStateCopyWith(ServicesState value, $Res Function(ServicesState) _then) = _$ServicesStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<ServiceEntity> services, ServiceEntity serviceDetail, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ bool isLoading, List<ServiceEntity> services, ServiceEntity serviceDetail, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -332,7 +332,7 @@ isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nulla
 as bool,services: null == services ? _self.services : services // ignore: cast_nullable_to_non_nullable
 as List<ServiceEntity>,serviceDetail: null == serviceDetail ? _self.serviceDetail : serviceDetail // ignore: cast_nullable_to_non_nullable
 as ServiceEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 /// Create a copy of ServicesState
@@ -426,7 +426,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ServicesState() when $default != null:
 return $default(_that.isLoading,_that.services,_that.serviceDetail,_that.apiFailureOrSuccess);case _:
@@ -447,7 +447,7 @@ return $default(_that.isLoading,_that.services,_that.serviceDetail,_that.apiFail
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _ServicesState():
 return $default(_that.isLoading,_that.services,_that.serviceDetail,_that.apiFailureOrSuccess);case _:
@@ -467,7 +467,7 @@ return $default(_that.isLoading,_that.services,_that.serviceDetail,_that.apiFail
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<ServiceEntity> services,  ServiceEntity serviceDetail,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _ServicesState() when $default != null:
 return $default(_that.isLoading,_that.services,_that.serviceDetail,_that.apiFailureOrSuccess);case _:
@@ -494,7 +494,7 @@ class _ServicesState extends ServicesState {
 }
 
 @override final  ServiceEntity serviceDetail;
-@override final  Option<Either<Failure, dynamic>> apiFailureOrSuccess;
+@override final  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess;
 
 /// Create a copy of ServicesState
 /// with the given fields replaced by the non-null parameter values.
@@ -526,7 +526,7 @@ abstract mixin class _$ServicesStateCopyWith<$Res> implements $ServicesStateCopy
   factory _$ServicesStateCopyWith(_ServicesState value, $Res Function(_ServicesState) _then) = __$ServicesStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<ServiceEntity> services, ServiceEntity serviceDetail, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ bool isLoading, List<ServiceEntity> services, ServiceEntity serviceDetail, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -549,7 +549,7 @@ isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nulla
 as bool,services: null == services ? _self._services : services // ignore: cast_nullable_to_non_nullable
 as List<ServiceEntity>,serviceDetail: null == serviceDetail ? _self.serviceDetail : serviceDetail // ignore: cast_nullable_to_non_nullable
 as ServiceEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 

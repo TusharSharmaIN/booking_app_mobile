@@ -55,10 +55,11 @@ extension BookingEventPatterns on BookingEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CreateBooking value)?  createBooking,TResult Function( _FetchMyBookings value)?  fetchMyBookings,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _OnBookingInputFieldChanged value)?  onBookingInputFieldChanged,TResult Function( _CreateBooking value)?  createBooking,TResult Function( _FetchMyBookings value)?  fetchMyBookings,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _CreateBooking() when createBooking != null:
+case _OnBookingInputFieldChanged() when onBookingInputFieldChanged != null:
+return onBookingInputFieldChanged(_that);case _CreateBooking() when createBooking != null:
 return createBooking(_that);case _FetchMyBookings() when fetchMyBookings != null:
 return fetchMyBookings(_that);case _:
   return orElse();
@@ -78,10 +79,11 @@ return fetchMyBookings(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CreateBooking value)  createBooking,required TResult Function( _FetchMyBookings value)  fetchMyBookings,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _OnBookingInputFieldChanged value)  onBookingInputFieldChanged,required TResult Function( _CreateBooking value)  createBooking,required TResult Function( _FetchMyBookings value)  fetchMyBookings,}){
 final _that = this;
 switch (_that) {
-case _CreateBooking():
+case _OnBookingInputFieldChanged():
+return onBookingInputFieldChanged(_that);case _CreateBooking():
 return createBooking(_that);case _FetchMyBookings():
 return fetchMyBookings(_that);case _:
   throw StateError('Unexpected subclass');
@@ -100,10 +102,11 @@ return fetchMyBookings(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CreateBooking value)?  createBooking,TResult? Function( _FetchMyBookings value)?  fetchMyBookings,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _OnBookingInputFieldChanged value)?  onBookingInputFieldChanged,TResult? Function( _CreateBooking value)?  createBooking,TResult? Function( _FetchMyBookings value)?  fetchMyBookings,}){
 final _that = this;
 switch (_that) {
-case _CreateBooking() when createBooking != null:
+case _OnBookingInputFieldChanged() when onBookingInputFieldChanged != null:
+return onBookingInputFieldChanged(_that);case _CreateBooking() when createBooking != null:
 return createBooking(_that);case _FetchMyBookings() when fetchMyBookings != null:
 return fetchMyBookings(_that);case _:
   return null;
@@ -122,9 +125,10 @@ return fetchMyBookings(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String serviceId,  DateTime scheduledAt,  String? notes)?  createBooking,TResult Function()?  fetchMyBookings,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( BookingFieldType fieldType,  String value)?  onBookingInputFieldChanged,TResult Function( String serviceId,  DateTime scheduledAt,  String? notes)?  createBooking,TResult Function()?  fetchMyBookings,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _CreateBooking() when createBooking != null:
+case _OnBookingInputFieldChanged() when onBookingInputFieldChanged != null:
+return onBookingInputFieldChanged(_that.fieldType,_that.value);case _CreateBooking() when createBooking != null:
 return createBooking(_that.serviceId,_that.scheduledAt,_that.notes);case _FetchMyBookings() when fetchMyBookings != null:
 return fetchMyBookings();case _:
   return orElse();
@@ -144,9 +148,10 @@ return fetchMyBookings();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String serviceId,  DateTime scheduledAt,  String? notes)  createBooking,required TResult Function()  fetchMyBookings,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( BookingFieldType fieldType,  String value)  onBookingInputFieldChanged,required TResult Function( String serviceId,  DateTime scheduledAt,  String? notes)  createBooking,required TResult Function()  fetchMyBookings,}) {final _that = this;
 switch (_that) {
-case _CreateBooking():
+case _OnBookingInputFieldChanged():
+return onBookingInputFieldChanged(_that.fieldType,_that.value);case _CreateBooking():
 return createBooking(_that.serviceId,_that.scheduledAt,_that.notes);case _FetchMyBookings():
 return fetchMyBookings();case _:
   throw StateError('Unexpected subclass');
@@ -165,15 +170,84 @@ return fetchMyBookings();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String serviceId,  DateTime scheduledAt,  String? notes)?  createBooking,TResult? Function()?  fetchMyBookings,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( BookingFieldType fieldType,  String value)?  onBookingInputFieldChanged,TResult? Function( String serviceId,  DateTime scheduledAt,  String? notes)?  createBooking,TResult? Function()?  fetchMyBookings,}) {final _that = this;
 switch (_that) {
-case _CreateBooking() when createBooking != null:
+case _OnBookingInputFieldChanged() when onBookingInputFieldChanged != null:
+return onBookingInputFieldChanged(_that.fieldType,_that.value);case _CreateBooking() when createBooking != null:
 return createBooking(_that.serviceId,_that.scheduledAt,_that.notes);case _FetchMyBookings() when fetchMyBookings != null:
 return fetchMyBookings();case _:
   return null;
 
 }
 }
+
+}
+
+/// @nodoc
+
+
+class _OnBookingInputFieldChanged implements BookingEvent {
+  const _OnBookingInputFieldChanged({required this.fieldType, required this.value});
+  
+
+ final  BookingFieldType fieldType;
+ final  String value;
+
+/// Create a copy of BookingEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$OnBookingInputFieldChangedCopyWith<_OnBookingInputFieldChanged> get copyWith => __$OnBookingInputFieldChangedCopyWithImpl<_OnBookingInputFieldChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnBookingInputFieldChanged&&(identical(other.fieldType, fieldType) || other.fieldType == fieldType)&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,fieldType,value);
+
+@override
+String toString() {
+  return 'BookingEvent.onBookingInputFieldChanged(fieldType: $fieldType, value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$OnBookingInputFieldChangedCopyWith<$Res> implements $BookingEventCopyWith<$Res> {
+  factory _$OnBookingInputFieldChangedCopyWith(_OnBookingInputFieldChanged value, $Res Function(_OnBookingInputFieldChanged) _then) = __$OnBookingInputFieldChangedCopyWithImpl;
+@useResult
+$Res call({
+ BookingFieldType fieldType, String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$OnBookingInputFieldChangedCopyWithImpl<$Res>
+    implements _$OnBookingInputFieldChangedCopyWith<$Res> {
+  __$OnBookingInputFieldChangedCopyWithImpl(this._self, this._then);
+
+  final _OnBookingInputFieldChanged _self;
+  final $Res Function(_OnBookingInputFieldChanged) _then;
+
+/// Create a copy of BookingEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? fieldType = null,Object? value = null,}) {
+  return _then(_OnBookingInputFieldChanged(
+fieldType: null == fieldType ? _self.fieldType : fieldType // ignore: cast_nullable_to_non_nullable
+as BookingFieldType,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
 
 }
 
@@ -282,7 +356,7 @@ String toString() {
 /// @nodoc
 mixin _$BookingState {
 
- bool get isLoading; bool get createSuccess; List<BookingEntity> get bookings; Option<Either<Failure, dynamic>> get apiFailureOrSuccess;
+ DateTimeValue get date; StringValue get notes; bool get isLoading; bool get createSuccess; List<BookingEntity> get bookings; Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccess;
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -293,16 +367,16 @@ $BookingStateCopyWith<BookingState> get copyWith => _$BookingStateCopyWithImpl<B
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.createSuccess, createSuccess) || other.createSuccess == createSuccess)&&const DeepCollectionEquality().equals(other.bookings, bookings)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingState&&(identical(other.date, date) || other.date == date)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.createSuccess, createSuccess) || other.createSuccess == createSuccess)&&const DeepCollectionEquality().equals(other.bookings, bookings)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,createSuccess,const DeepCollectionEquality().hash(bookings),apiFailureOrSuccess);
+int get hashCode => Object.hash(runtimeType,date,notes,isLoading,createSuccess,const DeepCollectionEquality().hash(bookings),apiFailureOrSuccess);
 
 @override
 String toString() {
-  return 'BookingState(isLoading: $isLoading, createSuccess: $createSuccess, bookings: $bookings, apiFailureOrSuccess: $apiFailureOrSuccess)';
+  return 'BookingState(date: $date, notes: $notes, isLoading: $isLoading, createSuccess: $createSuccess, bookings: $bookings, apiFailureOrSuccess: $apiFailureOrSuccess)';
 }
 
 
@@ -313,7 +387,7 @@ abstract mixin class $BookingStateCopyWith<$Res>  {
   factory $BookingStateCopyWith(BookingState value, $Res Function(BookingState) _then) = _$BookingStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, bool createSuccess, List<BookingEntity> bookings, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ DateTimeValue date, StringValue notes, bool isLoading, bool createSuccess, List<BookingEntity> bookings, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -330,13 +404,15 @@ class _$BookingStateCopyWithImpl<$Res>
 
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? createSuccess = null,Object? bookings = null,Object? apiFailureOrSuccess = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? notes = null,Object? isLoading = null,Object? createSuccess = null,Object? bookings = null,Object? apiFailureOrSuccess = null,}) {
   return _then(_self.copyWith(
-isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTimeValue,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as StringValue,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,createSuccess: null == createSuccess ? _self.createSuccess : createSuccess // ignore: cast_nullable_to_non_nullable
 as bool,bookings: null == bookings ? _self.bookings : bookings // ignore: cast_nullable_to_non_nullable
 as List<BookingEntity>,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 
@@ -421,10 +497,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTimeValue date,  StringValue notes,  bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BookingState() when $default != null:
-return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
+return $default(_that.date,_that.notes,_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
   return orElse();
 
 }
@@ -442,10 +518,10 @@ return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFail
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTimeValue date,  StringValue notes,  bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _BookingState():
-return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
+return $default(_that.date,_that.notes,_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -462,10 +538,10 @@ return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFail
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTimeValue date,  StringValue notes,  bool isLoading,  bool createSuccess,  List<BookingEntity> bookings,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _BookingState() when $default != null:
-return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
+return $default(_that.date,_that.notes,_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFailureOrSuccess);case _:
   return null;
 
 }
@@ -477,9 +553,11 @@ return $default(_that.isLoading,_that.createSuccess,_that.bookings,_that.apiFail
 
 
 class _BookingState extends BookingState {
-  const _BookingState({required this.isLoading, required this.createSuccess, required final  List<BookingEntity> bookings, required this.apiFailureOrSuccess}): _bookings = bookings,super._();
+  const _BookingState({required this.date, required this.notes, required this.isLoading, required this.createSuccess, required final  List<BookingEntity> bookings, required this.apiFailureOrSuccess}): _bookings = bookings,super._();
   
 
+@override final  DateTimeValue date;
+@override final  StringValue notes;
 @override final  bool isLoading;
 @override final  bool createSuccess;
  final  List<BookingEntity> _bookings;
@@ -489,7 +567,7 @@ class _BookingState extends BookingState {
   return EqualUnmodifiableListView(_bookings);
 }
 
-@override final  Option<Either<Failure, dynamic>> apiFailureOrSuccess;
+@override final  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess;
 
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
@@ -501,16 +579,16 @@ _$BookingStateCopyWith<_BookingState> get copyWith => __$BookingStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.createSuccess, createSuccess) || other.createSuccess == createSuccess)&&const DeepCollectionEquality().equals(other._bookings, _bookings)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingState&&(identical(other.date, date) || other.date == date)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.createSuccess, createSuccess) || other.createSuccess == createSuccess)&&const DeepCollectionEquality().equals(other._bookings, _bookings)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,createSuccess,const DeepCollectionEquality().hash(_bookings),apiFailureOrSuccess);
+int get hashCode => Object.hash(runtimeType,date,notes,isLoading,createSuccess,const DeepCollectionEquality().hash(_bookings),apiFailureOrSuccess);
 
 @override
 String toString() {
-  return 'BookingState(isLoading: $isLoading, createSuccess: $createSuccess, bookings: $bookings, apiFailureOrSuccess: $apiFailureOrSuccess)';
+  return 'BookingState(date: $date, notes: $notes, isLoading: $isLoading, createSuccess: $createSuccess, bookings: $bookings, apiFailureOrSuccess: $apiFailureOrSuccess)';
 }
 
 
@@ -521,7 +599,7 @@ abstract mixin class _$BookingStateCopyWith<$Res> implements $BookingStateCopyWi
   factory _$BookingStateCopyWith(_BookingState value, $Res Function(_BookingState) _then) = __$BookingStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, bool createSuccess, List<BookingEntity> bookings, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ DateTimeValue date, StringValue notes, bool isLoading, bool createSuccess, List<BookingEntity> bookings, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -538,13 +616,15 @@ class __$BookingStateCopyWithImpl<$Res>
 
 /// Create a copy of BookingState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? createSuccess = null,Object? bookings = null,Object? apiFailureOrSuccess = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? notes = null,Object? isLoading = null,Object? createSuccess = null,Object? bookings = null,Object? apiFailureOrSuccess = null,}) {
   return _then(_BookingState(
-isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTimeValue,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as StringValue,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,createSuccess: null == createSuccess ? _self.createSuccess : createSuccess // ignore: cast_nullable_to_non_nullable
 as bool,bookings: null == bookings ? _self._bookings : bookings // ignore: cast_nullable_to_non_nullable
 as List<BookingEntity>,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 

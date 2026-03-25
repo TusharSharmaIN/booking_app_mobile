@@ -1,6 +1,6 @@
 import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
+import 'package:booking_app_mobile/domain/core/error/failure_handler.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:booking_app_mobile/domain/services/entities/service_entity.dart';
 import 'package:booking_app_mobile/domain/services/repositories/service_repository.dart';
@@ -8,39 +8,27 @@ import 'package:booking_app_mobile/infrastructure/services/datasources/service_r
 
 @Injectable(as: ServiceRepository)
 class ServiceRepositoryImpl implements ServiceRepository {
-  final ServiceRemoteDataSource remoteDataSource;
+  final ServiceRemoteDataSource _remoteDataSource;
 
-  ServiceRepositoryImpl(this.remoteDataSource);
+  ServiceRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Either<Failure, List<ServiceEntity>>> getServices() async {
+  Future<Either<ApiFailure, List<ServiceEntity>>> getServices() async {
     try {
-      final response = await remoteDataSource.getServices();
-      if (response.success) {
-        return Right(response.data.map((model) => model.toDomain()).toList());
-      } else {
-        return const Left(Failure('Failed to load services'));
-      }
-    } on DioException catch (e) {
-      return Left(Failure(e.message ?? 'Unknown Error'));
+      final services = await _remoteDataSource.getServices();
+      return Right(services);
     } catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<Failure, ServiceEntity>> getServiceDetail(String id) async {
+  Future<Either<ApiFailure, ServiceEntity>> getServiceDetail(String id) async {
     try {
-      final response = await remoteDataSource.getServiceDetail(id);
-      if (response.success) {
-        return Right(response.data.toDomain());
-      } else {
-        return const Left(Failure('Failed to load service details'));
-      }
-    } on DioException catch (e) {
-      return Left(Failure(e.message ?? 'Unknown Error'));
+      final service = await _remoteDataSource.getServiceDetail(id);
+      return Right(service);
     } catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

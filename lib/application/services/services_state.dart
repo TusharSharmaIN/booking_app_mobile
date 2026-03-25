@@ -8,7 +8,7 @@ abstract class ServicesState with _$ServicesState {
     required bool isLoading,
     required List<ServiceEntity> services,
     required ServiceEntity serviceDetail,
-    required Option<Either<Failure, dynamic>> apiFailureOrSuccess,
+    required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess,
   }) = _ServicesState;
 
   factory ServicesState.initial() => ServicesState(

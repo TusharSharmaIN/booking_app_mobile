@@ -1,60 +1,42 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
+import 'package:booking_app_mobile/domain/core/error/failure_handler.dart';
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:booking_app_mobile/domain/booking/entities/booking_entity.dart';
 import 'package:booking_app_mobile/domain/booking/repositories/booking_repository.dart';
 import 'package:booking_app_mobile/infrastructure/booking/datasources/booking_remote_datasource.dart';
 
 @Injectable(as: BookingRepository)
 class BookingRepositoryImpl implements BookingRepository {
-  final BookingRemoteDataSource remoteDataSource;
+  final BookingRemoteDataSource _remoteDataSource;
 
-  BookingRepositoryImpl(this.remoteDataSource);
+  BookingRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Either<Failure, BookingEntity>> createBooking({
+  Future<Either<ApiFailure, BookingEntity>> createBooking({
     required String serviceId,
     required DateTime scheduledAt,
     String? notes,
   }) async {
     try {
-      final response = await remoteDataSource.createBooking({
+      final booking = await _remoteDataSource.createBooking({
         'serviceId': serviceId,
         'scheduledAt': scheduledAt.toIso8601String(),
         if (notes != null && notes.isNotEmpty) 'notes': notes,
       });
-      if (response.success) {
-        return Right(response.data.toDomain());
-      } else {
-        return const Left(Failure('Failed to create booking'));
-      }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        return const Left(Failure('Authentication failed'));
-      }
-      return Left(Failure(e.message ?? 'Unknown Error'));
+      return Right(booking);
     } catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<Failure, List<BookingEntity>>> getMyBookings() async {
+  Future<Either<ApiFailure, List<BookingEntity>>> getMyBookings() async {
     try {
-      final response = await remoteDataSource.getMyBookings();
-      if (response.success) {
-        return Right(response.data.map((model) => model.toDomain()).toList());
-      } else {
-        return const Left(Failure('Failed to load bookings'));
-      }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        return const Left(Failure('Authentication failed'));
-      }
-      return Left(Failure(e.message ?? 'Unknown Error'));
+      final bookings = await _remoteDataSource.getMyBookings();
+      return Right(bookings);
     } catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

@@ -1,22 +1,26 @@
-import 'package:dio/dio.dart';
+import 'package:booking_app_mobile/domain/booking/entities/booking_entity.dart';
+import 'package:booking_app_mobile/domain/core/error/exception_handler.dart';
+import 'package:booking_app_mobile/infrastructure/core/http/api_client.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:booking_app_mobile/infrastructure/core/network/api_constants.dart';
-import 'package:booking_app_mobile/infrastructure/booking/dtos/booking_dto.dart';
 
-part 'booking_remote_datasource.g.dart';
-
-@RestApi()
 @injectable
-abstract class BookingRemoteDataSource {
-  @factoryMethod
-  factory BookingRemoteDataSource(Dio dio) = _BookingRemoteDataSource;
+class BookingRemoteDataSource {
+  final ApiClient _apiClient;
+  final DataSourceExceptionHandler _exceptionHandler;
 
-  @POST(ApiConstants.bookings)
-  Future<SingleBookingResponse> createBooking(
-    @Body() Map<String, dynamic> body,
-  );
+  BookingRemoteDataSource(this._apiClient, this._exceptionHandler);
 
-  @GET(ApiConstants.myBookings)
-  Future<ListBookingResponse> getMyBookings();
+  Future<BookingEntity> createBooking(Map<String, dynamic> body) async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.createBooking(body);
+      return response.data.toDomain();
+    });
+  }
+
+  Future<List<BookingEntity>> getMyBookings() async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.getMyBookings();
+      return response.data.map((dto) => dto.toDomain()).toList();
+    });
+  }
 }

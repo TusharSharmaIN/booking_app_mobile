@@ -1,4 +1,5 @@
 import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
+import 'package:booking_app_mobile/domain/core/value/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,6 +22,16 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
 
   Future<void> _onEvent(BookingEvent event, Emitter<BookingState> emit) async {
     await event.map(
+      onBookingInputFieldChanged: (e) {
+        switch (e.fieldType) {
+          case BookingFieldType.timestamp:
+            emit(state.copyWith(date: DateTimeValue(e.value)));
+            break;
+          case BookingFieldType.notes:
+            emit(state.copyWith(notes: StringValue(e.value)));
+            break;
+        }
+      },
       createBooking: (e) async {
         emit(
           state.copyWith(

@@ -1,20 +1,26 @@
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:booking_app_mobile/infrastructure/core/network/api_constants.dart';
+import 'package:booking_app_mobile/domain/core/error/exception_handler.dart';
 import 'package:booking_app_mobile/infrastructure/auth/dtos/auth_response_dto.dart';
+import 'package:booking_app_mobile/infrastructure/core/http/api_client.dart';
+import 'package:injectable/injectable.dart';
 
-part 'auth_remote_datasource.g.dart';
-
-@RestApi()
 @injectable
-abstract class AuthRemoteDataSource {
-  @factoryMethod
-  factory AuthRemoteDataSource(Dio dio) = _AuthRemoteDataSource;
+class AuthRemoteDataSource {
+  final ApiClient _apiClient;
+  final DataSourceExceptionHandler _exceptionHandler;
 
-  @POST(ApiConstants.login)
-  Future<AuthDataWrapper> login(@Body() Map<String, dynamic> body);
+  AuthRemoteDataSource(this._apiClient, this._exceptionHandler);
 
-  @POST(ApiConstants.register)
-  Future<AuthDataWrapper> register(@Body() Map<String, dynamic> body);
+  Future<AuthResponseDto> login(Map<String, dynamic> body) async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.login(body);
+      return response.data;
+    });
+  }
+
+  Future<AuthResponseDto> register(Map<String, dynamic> body) async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.register(body);
+      return response.data;
+    });
+  }
 }

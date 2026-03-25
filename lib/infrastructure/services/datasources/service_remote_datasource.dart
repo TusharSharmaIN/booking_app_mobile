@@ -1,20 +1,26 @@
-import 'package:dio/dio.dart';
+import 'package:booking_app_mobile/domain/services/entities/service_entity.dart';
+import 'package:booking_app_mobile/domain/core/error/exception_handler.dart';
+import 'package:booking_app_mobile/infrastructure/core/http/api_client.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:booking_app_mobile/infrastructure/core/network/api_constants.dart';
-import 'package:booking_app_mobile/infrastructure/services/dtos/service_dto.dart';
 
-part 'service_remote_datasource.g.dart';
-
-@RestApi()
 @injectable
-abstract class ServiceRemoteDataSource {
-  @factoryMethod
-  factory ServiceRemoteDataSource(Dio dio) = _ServiceRemoteDataSource;
+class ServiceRemoteDataSource {
+  final ApiClient _apiClient;
+  final DataSourceExceptionHandler _exceptionHandler;
 
-  @GET(ApiConstants.services)
-  Future<ServicesListResponse> getServices();
+  ServiceRemoteDataSource(this._apiClient, this._exceptionHandler);
 
-  @GET('${ApiConstants.services}/{id}')
-  Future<ServiceDetailResponse> getServiceDetail(@Path('id') String id);
+  Future<List<ServiceEntity>> getServices() async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.getServices();
+      return response.data.map((dto) => dto.toDomain()).toList();
+    });
+  }
+
+  Future<ServiceEntity> getServiceDetail(String id) async {
+    return await _exceptionHandler.handle(() async {
+      final response = await _apiClient.getServiceDetail(id);
+      return response.data.toDomain();
+    });
+  }
 }

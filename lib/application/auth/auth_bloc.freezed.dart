@@ -14,62 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthEvent {
 
- String get email; String get password;
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AuthEventCopyWith<AuthEvent> get copyWith => _$AuthEventCopyWithImpl<AuthEvent>(this as AuthEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,password);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AuthEvent(email: $email, password: $password)';
+  return 'AuthEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthEventCopyWith<$Res>  {
-  factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) _then) = _$AuthEventCopyWithImpl;
-@useResult
-$Res call({
- String email, String password
-});
-
-
-
-
-}
-/// @nodoc
-class _$AuthEventCopyWithImpl<$Res>
-    implements $AuthEventCopyWith<$Res> {
-  _$AuthEventCopyWithImpl(this._self, this._then);
-
-  final AuthEvent _self;
-  final $Res Function(AuthEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,}) {
-  return _then(_self.copyWith(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
+class $AuthEventCopyWith<$Res>  {
+$AuthEventCopyWith(AuthEvent _, $Res Function(AuthEvent) __);
 }
 
 
@@ -87,10 +55,11 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoginRequested value)?  loginRequested,TResult Function( _RegisterRequested value)?  registerRequested,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _OnAuthInputFieldChanged value)?  onAuthInputFieldChanged,TResult Function( _LoginRequested value)?  loginRequested,TResult Function( _RegisterRequested value)?  registerRequested,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LoginRequested() when loginRequested != null:
+case _OnAuthInputFieldChanged() when onAuthInputFieldChanged != null:
+return onAuthInputFieldChanged(_that);case _LoginRequested() when loginRequested != null:
 return loginRequested(_that);case _RegisterRequested() when registerRequested != null:
 return registerRequested(_that);case _:
   return orElse();
@@ -110,10 +79,11 @@ return registerRequested(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoginRequested value)  loginRequested,required TResult Function( _RegisterRequested value)  registerRequested,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _OnAuthInputFieldChanged value)  onAuthInputFieldChanged,required TResult Function( _LoginRequested value)  loginRequested,required TResult Function( _RegisterRequested value)  registerRequested,}){
 final _that = this;
 switch (_that) {
-case _LoginRequested():
+case _OnAuthInputFieldChanged():
+return onAuthInputFieldChanged(_that);case _LoginRequested():
 return loginRequested(_that);case _RegisterRequested():
 return registerRequested(_that);}
 }
@@ -129,10 +99,11 @@ return registerRequested(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoginRequested value)?  loginRequested,TResult? Function( _RegisterRequested value)?  registerRequested,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _OnAuthInputFieldChanged value)?  onAuthInputFieldChanged,TResult? Function( _LoginRequested value)?  loginRequested,TResult? Function( _RegisterRequested value)?  registerRequested,}){
 final _that = this;
 switch (_that) {
-case _LoginRequested() when loginRequested != null:
+case _OnAuthInputFieldChanged() when onAuthInputFieldChanged != null:
+return onAuthInputFieldChanged(_that);case _LoginRequested() when loginRequested != null:
 return loginRequested(_that);case _RegisterRequested() when registerRequested != null:
 return registerRequested(_that);case _:
   return null;
@@ -151,9 +122,10 @@ return registerRequested(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  loginRequested,TResult Function( String name,  String email,  String password)?  registerRequested,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( AuthFieldType fieldType,  String value)?  onAuthInputFieldChanged,TResult Function( String email,  String password)?  loginRequested,TResult Function( String name,  String email,  String password)?  registerRequested,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LoginRequested() when loginRequested != null:
+case _OnAuthInputFieldChanged() when onAuthInputFieldChanged != null:
+return onAuthInputFieldChanged(_that.fieldType,_that.value);case _LoginRequested() when loginRequested != null:
 return loginRequested(_that.email,_that.password);case _RegisterRequested() when registerRequested != null:
 return registerRequested(_that.name,_that.email,_that.password);case _:
   return orElse();
@@ -173,9 +145,10 @@ return registerRequested(_that.name,_that.email,_that.password);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  loginRequested,required TResult Function( String name,  String email,  String password)  registerRequested,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( AuthFieldType fieldType,  String value)  onAuthInputFieldChanged,required TResult Function( String email,  String password)  loginRequested,required TResult Function( String name,  String email,  String password)  registerRequested,}) {final _that = this;
 switch (_that) {
-case _LoginRequested():
+case _OnAuthInputFieldChanged():
+return onAuthInputFieldChanged(_that.fieldType,_that.value);case _LoginRequested():
 return loginRequested(_that.email,_that.password);case _RegisterRequested():
 return registerRequested(_that.name,_that.email,_that.password);}
 }
@@ -191,9 +164,10 @@ return registerRequested(_that.name,_that.email,_that.password);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  loginRequested,TResult? Function( String name,  String email,  String password)?  registerRequested,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( AuthFieldType fieldType,  String value)?  onAuthInputFieldChanged,TResult? Function( String email,  String password)?  loginRequested,TResult? Function( String name,  String email,  String password)?  registerRequested,}) {final _that = this;
 switch (_that) {
-case _LoginRequested() when loginRequested != null:
+case _OnAuthInputFieldChanged() when onAuthInputFieldChanged != null:
+return onAuthInputFieldChanged(_that.fieldType,_that.value);case _LoginRequested() when loginRequested != null:
 return loginRequested(_that.email,_that.password);case _RegisterRequested() when registerRequested != null:
 return registerRequested(_that.name,_that.email,_that.password);case _:
   return null;
@@ -206,16 +180,84 @@ return registerRequested(_that.name,_that.email,_that.password);case _:
 /// @nodoc
 
 
+class _OnAuthInputFieldChanged implements AuthEvent {
+  const _OnAuthInputFieldChanged({required this.fieldType, required this.value});
+  
+
+ final  AuthFieldType fieldType;
+ final  String value;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$OnAuthInputFieldChangedCopyWith<_OnAuthInputFieldChanged> get copyWith => __$OnAuthInputFieldChangedCopyWithImpl<_OnAuthInputFieldChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnAuthInputFieldChanged&&(identical(other.fieldType, fieldType) || other.fieldType == fieldType)&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,fieldType,value);
+
+@override
+String toString() {
+  return 'AuthEvent.onAuthInputFieldChanged(fieldType: $fieldType, value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$OnAuthInputFieldChangedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory _$OnAuthInputFieldChangedCopyWith(_OnAuthInputFieldChanged value, $Res Function(_OnAuthInputFieldChanged) _then) = __$OnAuthInputFieldChangedCopyWithImpl;
+@useResult
+$Res call({
+ AuthFieldType fieldType, String value
+});
+
+
+
+
+}
+/// @nodoc
+class __$OnAuthInputFieldChangedCopyWithImpl<$Res>
+    implements _$OnAuthInputFieldChangedCopyWith<$Res> {
+  __$OnAuthInputFieldChangedCopyWithImpl(this._self, this._then);
+
+  final _OnAuthInputFieldChanged _self;
+  final $Res Function(_OnAuthInputFieldChanged) _then;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? fieldType = null,Object? value = null,}) {
+  return _then(_OnAuthInputFieldChanged(
+fieldType: null == fieldType ? _self.fieldType : fieldType // ignore: cast_nullable_to_non_nullable
+as AuthFieldType,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class _LoginRequested implements AuthEvent {
   const _LoginRequested({required this.email, required this.password});
   
 
-@override final  String email;
-@override final  String password;
+ final  String email;
+ final  String password;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$LoginRequestedCopyWith<_LoginRequested> get copyWith => __$LoginRequestedCopyWithImpl<_LoginRequested>(this, _$identity);
 
@@ -241,7 +283,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$LoginRequestedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
   factory _$LoginRequestedCopyWith(_LoginRequested value, $Res Function(_LoginRequested) _then) = __$LoginRequestedCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String email, String password
 });
@@ -260,7 +302,7 @@ class __$LoginRequestedCopyWithImpl<$Res>
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
   return _then(_LoginRequested(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -279,12 +321,12 @@ class _RegisterRequested implements AuthEvent {
   
 
  final  String name;
-@override final  String email;
-@override final  String password;
+ final  String email;
+ final  String password;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$RegisterRequestedCopyWith<_RegisterRequested> get copyWith => __$RegisterRequestedCopyWithImpl<_RegisterRequested>(this, _$identity);
 
@@ -310,7 +352,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$RegisterRequestedCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
   factory _$RegisterRequestedCopyWith(_RegisterRequested value, $Res Function(_RegisterRequested) _then) = __$RegisterRequestedCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String name, String email, String password
 });
@@ -329,7 +371,7 @@ class __$RegisterRequestedCopyWithImpl<$Res>
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? password = null,}) {
   return _then(_RegisterRequested(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -344,7 +386,7 @@ as String,
 /// @nodoc
 mixin _$AuthState {
 
- bool get isLoading; bool get isAuthenticated; UserEntity get user; Option<Either<Failure, dynamic>> get apiFailureOrSuccess;
+ bool get isLoading; StringValue get name; StringValue get email; StringValue get password; bool get isAuthenticated; UserEntity get user; Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccess;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -355,16 +397,16 @@ $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isAuthenticated, isAuthenticated) || other.isAuthenticated == isAuthenticated)&&(identical(other.user, user) || other.user == user)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isAuthenticated, isAuthenticated) || other.isAuthenticated == isAuthenticated)&&(identical(other.user, user) || other.user == user)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isAuthenticated,user,apiFailureOrSuccess);
+int get hashCode => Object.hash(runtimeType,isLoading,name,email,password,isAuthenticated,user,apiFailureOrSuccess);
 
 @override
 String toString() {
-  return 'AuthState(isLoading: $isLoading, isAuthenticated: $isAuthenticated, user: $user, apiFailureOrSuccess: $apiFailureOrSuccess)';
+  return 'AuthState(isLoading: $isLoading, name: $name, email: $email, password: $password, isAuthenticated: $isAuthenticated, user: $user, apiFailureOrSuccess: $apiFailureOrSuccess)';
 }
 
 
@@ -375,7 +417,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, bool isAuthenticated, UserEntity user, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ bool isLoading, StringValue name, StringValue email, StringValue password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -392,13 +434,16 @@ class _$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isAuthenticated = null,Object? user = null,Object? apiFailureOrSuccess = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? name = null,Object? email = null,Object? password = null,Object? isAuthenticated = null,Object? user = null,Object? apiFailureOrSuccess = null,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
+as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as StringValue,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as StringValue,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as StringValue,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
 as bool,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as UserEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 /// Create a copy of AuthState
@@ -492,10 +537,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool isAuthenticated,  UserEntity user,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
+return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
   return orElse();
 
 }
@@ -513,10 +558,10 @@ return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailur
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool isAuthenticated,  UserEntity user,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
-return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
+return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -533,10 +578,10 @@ return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailur
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool isAuthenticated,  UserEntity user,  Option<Either<Failure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  StringValue name,  StringValue email,  StringValue password,  bool isAuthenticated,  UserEntity user,  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
+return $default(_that.isLoading,_that.name,_that.email,_that.password,_that.isAuthenticated,_that.user,_that.apiFailureOrSuccess);case _:
   return null;
 
 }
@@ -548,13 +593,16 @@ return $default(_that.isLoading,_that.isAuthenticated,_that.user,_that.apiFailur
 
 
 class _AuthState extends AuthState {
-  const _AuthState({required this.isLoading, required this.isAuthenticated, required this.user, required this.apiFailureOrSuccess}): super._();
+  const _AuthState({required this.isLoading, required this.name, required this.email, required this.password, required this.isAuthenticated, required this.user, required this.apiFailureOrSuccess}): super._();
   
 
 @override final  bool isLoading;
+@override final  StringValue name;
+@override final  StringValue email;
+@override final  StringValue password;
 @override final  bool isAuthenticated;
 @override final  UserEntity user;
-@override final  Option<Either<Failure, dynamic>> apiFailureOrSuccess;
+@override final  Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess;
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
@@ -566,16 +614,16 @@ _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isAuthenticated, isAuthenticated) || other.isAuthenticated == isAuthenticated)&&(identical(other.user, user) || other.user == user)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.isAuthenticated, isAuthenticated) || other.isAuthenticated == isAuthenticated)&&(identical(other.user, user) || other.user == user)&&(identical(other.apiFailureOrSuccess, apiFailureOrSuccess) || other.apiFailureOrSuccess == apiFailureOrSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isAuthenticated,user,apiFailureOrSuccess);
+int get hashCode => Object.hash(runtimeType,isLoading,name,email,password,isAuthenticated,user,apiFailureOrSuccess);
 
 @override
 String toString() {
-  return 'AuthState(isLoading: $isLoading, isAuthenticated: $isAuthenticated, user: $user, apiFailureOrSuccess: $apiFailureOrSuccess)';
+  return 'AuthState(isLoading: $isLoading, name: $name, email: $email, password: $password, isAuthenticated: $isAuthenticated, user: $user, apiFailureOrSuccess: $apiFailureOrSuccess)';
 }
 
 
@@ -586,7 +634,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, bool isAuthenticated, UserEntity user, Option<Either<Failure, dynamic>> apiFailureOrSuccess
+ bool isLoading, StringValue name, StringValue email, StringValue password, bool isAuthenticated, UserEntity user, Option<Either<ApiFailure, dynamic>> apiFailureOrSuccess
 });
 
 
@@ -603,13 +651,16 @@ class __$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isAuthenticated = null,Object? user = null,Object? apiFailureOrSuccess = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? name = null,Object? email = null,Object? password = null,Object? isAuthenticated = null,Object? user = null,Object? apiFailureOrSuccess = null,}) {
   return _then(_AuthState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
+as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as StringValue,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as StringValue,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as StringValue,isAuthenticated: null == isAuthenticated ? _self.isAuthenticated : isAuthenticated // ignore: cast_nullable_to_non_nullable
 as bool,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as UserEntity,apiFailureOrSuccess: null == apiFailureOrSuccess ? _self.apiFailureOrSuccess : apiFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-as Option<Either<Failure, dynamic>>,
+as Option<Either<ApiFailure, dynamic>>,
   ));
 }
 
