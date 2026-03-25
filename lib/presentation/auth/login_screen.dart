@@ -6,6 +6,7 @@ import 'package:booking_app_mobile/presentation/theme/base_colors.dart';
 import 'package:booking_app_mobile/presentation/theme/base_text_styles.dart';
 import 'package:booking_app_mobile/application/auth/auth_bloc.dart';
 import 'package:booking_app_mobile/presentation/core/custom/custom_text_field.dart';
+import 'package:booking_app_mobile/presentation/core/utils/response_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,14 +26,10 @@ class LoginScreen extends StatelessWidget {
           }
           state.apiFailureOrSuccess.fold(
             () {},
-            (either) => either.fold((failure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(failure.message),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            }, (_) {}),
+            (either) => either.fold(
+              (failure) => ResponseUtils.handleApiFailure(context, failure),
+              (_) {},
+            ),
           );
         },
         child: const SafeArea(child: _LoginFormView()),
@@ -141,8 +138,9 @@ class LoginCTA extends StatelessWidget {
               ? null
               : () {
                   if (!state.email.isValid() || !state.password.isValid()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please fill all fields')),
+                    ResponseUtils.handleApiSuccess(
+                      context,
+                      message: 'Please fill all fields correctly',
                     );
                     return;
                   }
