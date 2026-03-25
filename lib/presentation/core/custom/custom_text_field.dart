@@ -11,6 +11,8 @@ class CustomTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final String? errorText;
+  final int maxLines;
+  final bool alignLabelWithHint;
 
   const CustomTextField({
     super.key,
@@ -22,6 +24,8 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.errorText,
+    this.maxLines = 1,
+    this.alignLabelWithHint = false,
   });
 
   @override
@@ -41,11 +45,13 @@ class CustomTextField extends StatelessWidget {
           onChanged: onChanged,
           obscureText: obscureText,
           keyboardType: keyboardType,
+          maxLines: maxLines,
           style: BaseTextStyles.poppinsMediumRegular.copyWith(
             color: BaseColors.black,
           ),
           decoration: InputDecoration(
             hintText: hint,
+            alignLabelWithHint: alignLabelWithHint,
             hintStyle: BaseTextStyles.poppinsMediumRegular.copyWith(
               color: BaseColors.grey400,
             ),
