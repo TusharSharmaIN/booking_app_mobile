@@ -1,4 +1,4 @@
-import 'package:booking_app_mobile/infrastructure/core/network/api_constants.dart';
+import 'package:booking_app_mobile/infrastructure/core/http/api_constants.dart';
 import 'package:booking_app_mobile/infrastructure/auth/dtos/auth_response_dto.dart';
 import 'package:booking_app_mobile/infrastructure/booking/dtos/booking_dto.dart';
 import 'package:booking_app_mobile/infrastructure/services/dtos/service_dto.dart';

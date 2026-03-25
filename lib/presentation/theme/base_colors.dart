@@ -22,9 +22,9 @@ abstract class BaseColors {
   //=====================================
   static const Color statusPending = Color(0xFFF57C00);
   static const Color statusPendingBg = Color(0xFFFFF3E0);
-  static const Color statusConfirmed = Color(0xFF43A047);
+  static const Color statusConfirmed = Color.fromARGB(255, 116, 200, 120);
   static const Color statusConfirmedBg = Color(0xFFE8F5E9);
-  static const Color statusCancelled = Color(0xFFE53935);
+  static const Color statusCancelled = Color.fromARGB(255, 239, 108, 106);
   static const Color statusCancelledBg = Color(0xFFFFEBEE);
   static const Color statusCompleted = Color(0xFF616161);
   static const Color statusCompletedBg = Color(0xFFF5F5F5);

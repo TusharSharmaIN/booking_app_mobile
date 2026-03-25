@@ -1,3 +1,5 @@
+import 'package:booking_app_mobile/presentation/theme/base_colors.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:booking_app_mobile/domain/services/entities/service_entity.dart';
 import 'package:booking_app_mobile/domain/auth/entities/user_entity.dart';
@@ -30,4 +32,34 @@ abstract class BookingEntity with _$BookingEntity {
     service: ServiceEntity.empty(),
     user: UserEntity.empty(),
   );
+
+  Color getStatusColor() {
+    switch (status.getValue().toUpperCase()) {
+      case 'PENDING':
+        return BaseColors.statusPending;
+      case 'CONFIRMED':
+        return BaseColors.statusConfirmed;
+      case 'CANCELLED':
+        return BaseColors.statusCancelled;
+      case 'COMPLETED':
+        return BaseColors.statusCompleted;
+      default:
+        return BaseColors.statusUnknown;
+    }
+  }
+
+  Color getStatusBgColor() {
+    switch (status.getValue().toUpperCase()) {
+      case 'PENDING':
+        return BaseColors.statusPendingBg;
+      case 'CONFIRMED':
+        return BaseColors.statusConfirmedBg;
+      case 'CANCELLED':
+        return BaseColors.statusCancelledBg;
+      case 'COMPLETED':
+        return BaseColors.statusCompletedBg;
+      default:
+        return BaseColors.statusUnknownBg;
+    }
+  }
 }

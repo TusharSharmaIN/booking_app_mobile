@@ -137,6 +137,16 @@ class DateTimeValue extends ValueObject<String> {
     value.getOrElse(() => DateTime.now().toIso8601String()),
   ).toLocal();
 
+  /// Formats date as "dd/mm/yyyy at hh:mm"
+  String getFormattedDate() {
+    try {
+      final dt = dateTime;
+      return '${dt.day}/${dt.month}/${dt.year} at ${dt.hour}:${dt.minute.toString().padLeft(2, '0')}';
+    } catch (_) {
+      return '';
+    }
+  }
+
   bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 }
 

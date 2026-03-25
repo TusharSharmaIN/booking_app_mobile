@@ -1,3 +1,4 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:booking_app_mobile/presentation/router/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,9 +139,11 @@ class LoginCTA extends StatelessWidget {
               ? null
               : () {
                   if (!state.email.isValid() || !state.password.isValid()) {
-                    ResponseUtils.handleApiSuccess(
+                    ResponseUtils.handleApiFailure(
                       context,
-                      message: 'Please fill all fields correctly',
+                      const ApiFailure.other(
+                        'Please fill all fields correctly',
+                      ),
                     );
                     return;
                   }
