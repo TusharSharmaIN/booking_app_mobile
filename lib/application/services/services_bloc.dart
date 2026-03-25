@@ -1,11 +1,11 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/errors/failures.dart';
-import '../../domain/services/entities/service_entity.dart';
-import '../../domain/services/repositories/service_repository.dart';
+import 'package:booking_app_mobile/domain/services/entities/service_entity.dart';
+import 'package:booking_app_mobile/domain/services/repositories/service_repository.dart';
 
 part 'services_event.dart';
 part 'services_state.dart';
@@ -19,15 +19,13 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
     on<ServicesEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(ServicesEvent event, Emitter<ServicesState> emit) async {
+  Future<void> _onEvent(
+    ServicesEvent event,
+    Emitter<ServicesState> emit,
+  ) async {
     await event.map(
       fetchServices: (_) async {
-        emit(
-          state.copyWith(
-            isLoading: true,
-            apiFailureOrSuccess: none(),
-          ),
-        );
+        emit(state.copyWith(isLoading: true, apiFailureOrSuccess: none()));
 
         final result = await _serviceRepository.getServices();
 
@@ -52,12 +50,7 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
         );
       },
       fetchServiceDetail: (e) async {
-        emit(
-          state.copyWith(
-            isLoading: true,
-            apiFailureOrSuccess: none(),
-          ),
-        );
+        emit(state.copyWith(isLoading: true, apiFailureOrSuccess: none()));
 
         final result = await _serviceRepository.getServiceDetail(e.id);
 

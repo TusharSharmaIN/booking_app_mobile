@@ -1,9 +1,9 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:booking_app_mobile/core/errors/failures.dart';
 import 'package:booking_app_mobile/domain/auth/entities/user_entity.dart';
 import 'package:booking_app_mobile/domain/auth/repositories/auth_repository.dart';
 

@@ -1,7 +1,7 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:booking_app_mobile/core/errors/failures.dart';
 import 'package:booking_app_mobile/domain/services/entities/service_entity.dart';
 import 'package:booking_app_mobile/domain/services/repositories/service_repository.dart';
 import 'package:booking_app_mobile/infrastructure/services/datasources/service_remote_datasource.dart';
@@ -19,12 +19,12 @@ class ServiceRepositoryImpl implements ServiceRepository {
       if (response.success) {
         return Right(response.data.map((model) => model.toDomain()).toList());
       } else {
-        return const Left(ServerFailure('Failed to load services'));
+        return const Left(Failure('Failed to load services'));
       }
     } on DioException catch (e) {
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -35,12 +35,12 @@ class ServiceRepositoryImpl implements ServiceRepository {
       if (response.success) {
         return Right(response.data.toDomain());
       } else {
-        return const Left(ServerFailure('Failed to load service details'));
+        return const Left(Failure('Failed to load service details'));
       }
     } on DioException catch (e) {
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 }

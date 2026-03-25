@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:booking_app_mobile/core/errors/failures.dart';
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:booking_app_mobile/domain/booking/entities/booking_entity.dart';
 import 'package:booking_app_mobile/domain/booking/repositories/booking_repository.dart';
 import 'package:booking_app_mobile/infrastructure/booking/datasources/booking_remote_datasource.dart';
@@ -27,15 +27,15 @@ class BookingRepositoryImpl implements BookingRepository {
       if (response.success) {
         return Right(response.data.toDomain());
       } else {
-        return const Left(ServerFailure('Failed to create booking'));
+        return const Left(Failure('Failed to create booking'));
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
-        return const Left(AuthFailure());
+        return const Left(Failure('Authentication failed'));
       }
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -46,15 +46,15 @@ class BookingRepositoryImpl implements BookingRepository {
       if (response.success) {
         return Right(response.data.map((model) => model.toDomain()).toList());
       } else {
-        return const Left(ServerFailure('Failed to load bookings'));
+        return const Left(Failure('Failed to load bookings'));
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
-        return const Left(AuthFailure());
+        return const Left(Failure('Authentication failed'));
       }
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 }

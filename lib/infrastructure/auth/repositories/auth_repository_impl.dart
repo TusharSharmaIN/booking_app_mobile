@@ -1,8 +1,8 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:booking_app_mobile/core/auth/auth_session.dart';
-import 'package:booking_app_mobile/core/errors/failures.dart';
+import 'package:booking_app_mobile/infrastructure/core/auth_session/auth_session.dart';
 import 'package:booking_app_mobile/domain/auth/entities/user_entity.dart';
 import 'package:booking_app_mobile/domain/auth/repositories/auth_repository.dart';
 import 'package:booking_app_mobile/infrastructure/auth/datasources/auth_remote_datasource.dart';
@@ -29,15 +29,15 @@ class AuthRepositoryImpl implements AuthRepository {
         await authSession.saveSession(response.data.token);
         return Right(response.data.user.toDomain());
       } else {
-        return const Left(AuthFailure());
+        return const Left(Failure('Authentication failed'));
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
-        return const Left(AuthFailure());
+        return const Left(Failure('Authentication failed'));
       }
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -58,12 +58,12 @@ class AuthRepositoryImpl implements AuthRepository {
         await authSession.saveSession(response.data.token);
         return Right(response.data.user.toDomain());
       } else {
-        return const Left(AuthFailure());
+        return const Left(Failure('Registration failed'));
       }
     } on DioException catch (e) {
-      return Left(ServerFailure(e.message ?? 'Unknown Error'));
+      return Left(Failure(e.message ?? 'Unknown Error'));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(Failure(e.toString()));
     }
   }
 }

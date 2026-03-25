@@ -1,5 +1,5 @@
+import 'package:booking_app_mobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:booking_app_mobile/core/errors/failures.dart';
 
 abstract class ValueObject<T> {
   const ValueObject();

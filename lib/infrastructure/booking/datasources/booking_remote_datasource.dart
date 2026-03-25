@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:booking_app_mobile/core/network/api_constants.dart';
+import 'package:booking_app_mobile/infrastructure/core/network/api_constants.dart';
 import 'package:booking_app_mobile/infrastructure/booking/dtos/booking_dto.dart';
 
 part 'booking_remote_datasource.g.dart';
