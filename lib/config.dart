@@ -6,6 +6,8 @@ class Config {
   Duration httpConnectTimeout = const Duration(milliseconds: 600000);
   Duration httpReceiveTimeout = const Duration(milliseconds: 600000);
 
+  String baseUrl = 'https://service-booking-api-b8ma.onrender.com/api';
+
   String get env {
     switch (appFlavor) {
       case Flavor.dev:
