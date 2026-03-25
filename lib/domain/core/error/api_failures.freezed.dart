@@ -55,7 +55,7 @@ extension ApiFailurePatterns on ApiFailure {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Other value)?  other,TResult Function( _ServerError value)?  serverError,TResult Function( _PoorConnection value)?  poorConnection,TResult Function( _ServerTimeout value)?  serverTimeout,TResult Function( _NetworkError value)?  networkError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Other value)?  other,TResult Function( _ServerError value)?  serverError,TResult Function( _PoorConnection value)?  poorConnection,TResult Function( _ServerTimeout value)?  serverTimeout,TResult Function( _NetworkError value)?  networkError,TResult Function( TokenExpired value)?  tokenExpired,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Other() when other != null:
@@ -63,7 +63,8 @@ return other(_that);case _ServerError() when serverError != null:
 return serverError(_that);case _PoorConnection() when poorConnection != null:
 return poorConnection(_that);case _ServerTimeout() when serverTimeout != null:
 return serverTimeout(_that);case _NetworkError() when networkError != null:
-return networkError(_that);case _:
+return networkError(_that);case TokenExpired() when tokenExpired != null:
+return tokenExpired(_that);case _:
   return orElse();
 
 }
@@ -81,7 +82,7 @@ return networkError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Other value)  other,required TResult Function( _ServerError value)  serverError,required TResult Function( _PoorConnection value)  poorConnection,required TResult Function( _ServerTimeout value)  serverTimeout,required TResult Function( _NetworkError value)  networkError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Other value)  other,required TResult Function( _ServerError value)  serverError,required TResult Function( _PoorConnection value)  poorConnection,required TResult Function( _ServerTimeout value)  serverTimeout,required TResult Function( _NetworkError value)  networkError,required TResult Function( TokenExpired value)  tokenExpired,}){
 final _that = this;
 switch (_that) {
 case _Other():
@@ -89,7 +90,8 @@ return other(_that);case _ServerError():
 return serverError(_that);case _PoorConnection():
 return poorConnection(_that);case _ServerTimeout():
 return serverTimeout(_that);case _NetworkError():
-return networkError(_that);case _:
+return networkError(_that);case TokenExpired():
+return tokenExpired(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +108,7 @@ return networkError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Other value)?  other,TResult? Function( _ServerError value)?  serverError,TResult? Function( _PoorConnection value)?  poorConnection,TResult? Function( _ServerTimeout value)?  serverTimeout,TResult? Function( _NetworkError value)?  networkError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Other value)?  other,TResult? Function( _ServerError value)?  serverError,TResult? Function( _PoorConnection value)?  poorConnection,TResult? Function( _ServerTimeout value)?  serverTimeout,TResult? Function( _NetworkError value)?  networkError,TResult? Function( TokenExpired value)?  tokenExpired,}){
 final _that = this;
 switch (_that) {
 case _Other() when other != null:
@@ -114,7 +116,8 @@ return other(_that);case _ServerError() when serverError != null:
 return serverError(_that);case _PoorConnection() when poorConnection != null:
 return poorConnection(_that);case _ServerTimeout() when serverTimeout != null:
 return serverTimeout(_that);case _NetworkError() when networkError != null:
-return networkError(_that);case _:
+return networkError(_that);case TokenExpired() when tokenExpired != null:
+return tokenExpired(_that);case _:
   return null;
 
 }
@@ -131,14 +134,15 @@ return networkError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message)?  other,TResult Function( String message)?  serverError,TResult Function()?  poorConnection,TResult Function()?  serverTimeout,TResult Function()?  networkError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message)?  other,TResult Function( String message)?  serverError,TResult Function()?  poorConnection,TResult Function()?  serverTimeout,TResult Function()?  networkError,TResult Function()?  tokenExpired,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Other() when other != null:
 return other(_that.message);case _ServerError() when serverError != null:
 return serverError(_that.message);case _PoorConnection() when poorConnection != null:
 return poorConnection();case _ServerTimeout() when serverTimeout != null:
 return serverTimeout();case _NetworkError() when networkError != null:
-return networkError();case _:
+return networkError();case TokenExpired() when tokenExpired != null:
+return tokenExpired();case _:
   return orElse();
 
 }
@@ -156,14 +160,15 @@ return networkError();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message)  other,required TResult Function( String message)  serverError,required TResult Function()  poorConnection,required TResult Function()  serverTimeout,required TResult Function()  networkError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message)  other,required TResult Function( String message)  serverError,required TResult Function()  poorConnection,required TResult Function()  serverTimeout,required TResult Function()  networkError,required TResult Function()  tokenExpired,}) {final _that = this;
 switch (_that) {
 case _Other():
 return other(_that.message);case _ServerError():
 return serverError(_that.message);case _PoorConnection():
 return poorConnection();case _ServerTimeout():
 return serverTimeout();case _NetworkError():
-return networkError();case _:
+return networkError();case TokenExpired():
+return tokenExpired();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +185,15 @@ return networkError();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message)?  other,TResult? Function( String message)?  serverError,TResult? Function()?  poorConnection,TResult? Function()?  serverTimeout,TResult? Function()?  networkError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message)?  other,TResult? Function( String message)?  serverError,TResult? Function()?  poorConnection,TResult? Function()?  serverTimeout,TResult? Function()?  networkError,TResult? Function()?  tokenExpired,}) {final _that = this;
 switch (_that) {
 case _Other() when other != null:
 return other(_that.message);case _ServerError() when serverError != null:
 return serverError(_that.message);case _PoorConnection() when poorConnection != null:
 return poorConnection();case _ServerTimeout() when serverTimeout != null:
 return serverTimeout();case _NetworkError() when networkError != null:
-return networkError();case _:
+return networkError();case TokenExpired() when tokenExpired != null:
+return tokenExpired();case _:
   return null;
 
 }
@@ -198,8 +204,8 @@ return networkError();case _:
 /// @nodoc
 
 
-class _Other implements ApiFailure {
-  const _Other(this.message);
+class _Other extends ApiFailure {
+  const _Other(this.message): super._();
   
 
  final  String message;
@@ -264,8 +270,8 @@ as String,
 /// @nodoc
 
 
-class _ServerError implements ApiFailure {
-  const _ServerError(this.message);
+class _ServerError extends ApiFailure {
+  const _ServerError(this.message): super._();
   
 
  final  String message;
@@ -330,8 +336,8 @@ as String,
 /// @nodoc
 
 
-class _PoorConnection implements ApiFailure {
-  const _PoorConnection();
+class _PoorConnection extends ApiFailure {
+  const _PoorConnection(): super._();
   
 
 
@@ -362,8 +368,8 @@ String toString() {
 /// @nodoc
 
 
-class _ServerTimeout implements ApiFailure {
-  const _ServerTimeout();
+class _ServerTimeout extends ApiFailure {
+  const _ServerTimeout(): super._();
   
 
 
@@ -394,8 +400,8 @@ String toString() {
 /// @nodoc
 
 
-class _NetworkError implements ApiFailure {
-  const _NetworkError();
+class _NetworkError extends ApiFailure {
+  const _NetworkError(): super._();
   
 
 
@@ -424,269 +430,35 @@ String toString() {
 
 
 /// @nodoc
-mixin _$Failure {
-
- String get message; Map<String, String> get arguments;
-/// Create a copy of Failure
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$FailureCopyWith<Failure> get copyWith => _$FailureCopyWithImpl<Failure>(this as Failure, _$identity);
 
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.arguments, arguments));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,message,const DeepCollectionEquality().hash(arguments));
-
-@override
-String toString() {
-  return 'Failure(message: $message, arguments: $arguments)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $FailureCopyWith<$Res>  {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) _then) = _$FailureCopyWithImpl;
-@useResult
-$Res call({
- String message, Map<String, String> arguments
-});
-
-
-
-
-}
-/// @nodoc
-class _$FailureCopyWithImpl<$Res>
-    implements $FailureCopyWith<$Res> {
-  _$FailureCopyWithImpl(this._self, this._then);
-
-  final Failure _self;
-  final $Res Function(Failure) _then;
-
-/// Create a copy of Failure
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = null,Object? arguments = null,}) {
-  return _then(_self.copyWith(
-message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,arguments: null == arguments ? _self.arguments : arguments // ignore: cast_nullable_to_non_nullable
-as Map<String, String>,
-  ));
-}
-
-}
-
-
-/// Adds pattern-matching-related methods to [Failure].
-extension FailurePatterns on Failure {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Failure value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _Failure() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Failure value)  $default,){
-final _that = this;
-switch (_that) {
-case _Failure():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Failure value)?  $default,){
-final _that = this;
-switch (_that) {
-case _Failure() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message,  Map<String, String> arguments)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _Failure() when $default != null:
-return $default(_that.message,_that.arguments);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message,  Map<String, String> arguments)  $default,) {final _that = this;
-switch (_that) {
-case _Failure():
-return $default(_that.message,_that.arguments);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message,  Map<String, String> arguments)?  $default,) {final _that = this;
-switch (_that) {
-case _Failure() when $default != null:
-return $default(_that.message,_that.arguments);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-
-
-class _Failure extends Failure {
-  const _Failure(this.message, {final  Map<String, String> arguments = const <String, String>{}}): _arguments = arguments,super._();
+class TokenExpired extends ApiFailure {
+  const TokenExpired(): super._();
   
 
-@override final  String message;
- final  Map<String, String> _arguments;
-@override@JsonKey() Map<String, String> get arguments {
-  if (_arguments is EqualUnmodifiableMapView) return _arguments;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_arguments);
-}
 
 
-/// Create a copy of Failure
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$FailureCopyWith<_Failure> get copyWith => __$FailureCopyWithImpl<_Failure>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._arguments, _arguments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TokenExpired);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,const DeepCollectionEquality().hash(_arguments));
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'Failure(message: $message, arguments: $arguments)';
+  return 'ApiFailure.tokenExpired()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class _$FailureCopyWith<$Res> implements $FailureCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
-@override @useResult
-$Res call({
- String message, Map<String, String> arguments
-});
 
 
-
-
-}
-/// @nodoc
-class __$FailureCopyWithImpl<$Res>
-    implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
-
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
-
-/// Create a copy of Failure
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? arguments = null,}) {
-  return _then(_Failure(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,arguments: null == arguments ? _self._arguments : arguments // ignore: cast_nullable_to_non_nullable
-as Map<String, String>,
-  ));
-}
-
-
-}
 
 // dart format on

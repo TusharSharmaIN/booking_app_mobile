@@ -43,37 +43,4 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
 
   const factory ValueFailure.mustMatchNewPassword({required T failedValue}) =
       MatchNewPassword<T>;
-
-  const factory ValueFailure.invalidJWT({required T failedValue}) =
-      InvalidJWT<T>;
-
-  const factory ValueFailure.invalidJWTPayload({required T failedValue}) =
-      InvalidJWTPayload<T>;
-
-  const factory ValueFailure.invalidCharLimits({
-    required T failedValue,
-    required int min,
-    required int max,
-  }) = InvalidCharLimits<T>;
-
-  const factory ValueFailure.invalidNumLimits({
-    required T failedValue,
-    required num min,
-    required num max,
-  }) = InvalidNumLimits<T>;
-
-  const factory ValueFailure.invalidNumMin({
-    required T failedValue,
-    required num min,
-  }) = InvalidNumMin<T>;
-
-  const factory ValueFailure.invalidUrl({required T failedValue}) =
-      InvalidUrl<T>;
-
-  const factory ValueFailure.invalidWalletAddress({required T failedValue}) =
-      InvalidWalletAddress<T>;
-
-  const factory ValueFailure.invalidTransactionStatus({
-    required T failedValue,
-  }) = InvalidTransactionStatus<T>;
 }
