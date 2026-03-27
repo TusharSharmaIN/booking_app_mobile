@@ -22,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
             p.isAuthenticated != c.isAuthenticated,
         listener: (context, state) {
           if (state.isAuthenticated) {
-            context.go(AppRoutes.services);
+            context.go(AppRoutes.servicesPath);
             return;
           }
 
@@ -30,7 +30,7 @@ class RegisterScreen extends StatelessWidget {
             () {},
             (either) => either.fold(
               (failure) => ResponseUtils.handleApiFailure(context, failure),
-              (_) => context.go(AppRoutes.services),
+              (_) => context.go(AppRoutes.servicesPath),
             ),
           );
         },

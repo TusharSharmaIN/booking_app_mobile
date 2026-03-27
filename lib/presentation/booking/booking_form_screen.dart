@@ -68,7 +68,7 @@ class ShowSuccessDialog {
           TextButton(
             onPressed: () {
               context.pop();
-              context.go(AppRoutes.services);
+              context.go(AppRoutes.servicesPath);
             },
             child: Text(
               'OK',
@@ -91,6 +91,7 @@ class _BookingFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Expanded(
           child: SingleChildScrollView(
@@ -321,11 +322,11 @@ class _NotesSection extends StatelessWidget {
       alignLabelWithHint: true,
       onChanged: (value) {
         context.read<BookingBloc>().add(
-              BookingEvent.onBookingInputFieldChanged(
-                fieldType: BookingFieldType.notes,
-                value: value,
-              ),
-            );
+          BookingEvent.onBookingInputFieldChanged(
+            fieldType: BookingFieldType.notes,
+            value: value,
+          ),
+        );
       },
     );
   }
@@ -386,6 +387,7 @@ class _ConfirmBookingCTA extends StatelessWidget {
               elevation: 0,
               backgroundColor: BaseColors.black,
               foregroundColor: BaseColors.white,
+              disabledBackgroundColor: BaseColors.grey300,
             ),
             onPressed: isLoading ? null : () => _onConfirmPressed(context),
             child: isLoading

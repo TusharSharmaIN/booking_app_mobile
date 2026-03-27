@@ -10,34 +10,46 @@ import 'package:booking_app_mobile/presentation/booking/booking_form_screen.dart
 import 'package:booking_app_mobile/presentation/booking/my_bookings_screen.dart';
 
 class AppRoutes {
-  static const String login = '/login';
-  static const String register = '/register';
-  static const String services = '/services';
-  static const String serviceDetail = ':id';
-  static const String serviceBook = 'book';
-  static const String myBookings = '/bookings/my';
+  // Paths
+  static const String loginPath = '/login';
+  static const String registerPath = '/register';
+  static const String servicesPath = '/services';
+  static const String serviceDetailPath = ':serviceId';
+  static const String serviceBookPath = 'book';
+  static const String myBookingsPath = '/bookings/my';
+
+  // Names
+  static const String login = 'login';
+  static const String register = 'register';
+  static const String services = 'services';
+  static const String serviceDetail = 'serviceDetail';
+  static const String serviceBook = 'serviceBook';
+  static const String myBookings = 'myBookings';
+
+  // Parameters
+  static const String serviceId = 'serviceId';
 }
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
 
 final goRouter = GoRouter(
-  initialLocation: AppRoutes.services,
+  initialLocation: AppRoutes.servicesPath,
   observers: [routeObserver],
   redirect: (context, state) {
     try {
       final authSession = getIt<AuthSession>();
       final isLoggedIn = authSession.isLoggedIn;
       final isGoingToAuth =
-          state.matchedLocation == AppRoutes.login ||
-          state.matchedLocation == AppRoutes.register;
+          state.matchedLocation == AppRoutes.loginPath ||
+          state.matchedLocation == AppRoutes.registerPath;
 
       if (!isLoggedIn && !isGoingToAuth) {
-        return AppRoutes.login;
+        return AppRoutes.loginPath;
       }
 
       if (isLoggedIn && isGoingToAuth) {
-        return AppRoutes.services;
+        return AppRoutes.servicesPath;
       }
     } catch (_) {
       // safe fallback if missing
@@ -46,28 +58,33 @@ final goRouter = GoRouter(
   },
   routes: [
     GoRoute(
-      path: AppRoutes.login,
+      path: AppRoutes.loginPath,
+      name: AppRoutes.login,
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: AppRoutes.register,
+      path: AppRoutes.registerPath,
+      name: AppRoutes.register,
       builder: (context, state) => const RegisterScreen(),
     ),
     GoRoute(
-      path: AppRoutes.services,
+      path: AppRoutes.servicesPath,
+      name: AppRoutes.services,
       builder: (context, state) => const ServicesListScreen(),
       routes: [
         GoRoute(
-          path: AppRoutes.serviceDetail,
+          name: AppRoutes.serviceDetail,
+          path: AppRoutes.serviceDetailPath,
           builder: (context, state) {
-            final id = state.pathParameters['id']!;
+            final id = state.extra as String;
             return ServiceDetailScreen(serviceId: id);
           },
           routes: [
             GoRoute(
-              path: AppRoutes.serviceBook,
+              name: AppRoutes.serviceBook,
+              path: AppRoutes.serviceBookPath,
               builder: (context, state) {
-                final id = state.pathParameters['id']!;
+                final id = state.pathParameters[AppRoutes.serviceId]!;
                 return BookingFormScreen(serviceId: id);
               },
             ),
@@ -76,7 +93,8 @@ final goRouter = GoRouter(
       ],
     ),
     GoRoute(
-      path: AppRoutes.myBookings,
+      path: AppRoutes.myBookingsPath,
+      name: AppRoutes.myBookings,
       builder: (context, state) => const MyBookingsScreen(),
     ),
   ],

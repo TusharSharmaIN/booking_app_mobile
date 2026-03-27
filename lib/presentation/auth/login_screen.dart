@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             p.isAuthenticated != c.isAuthenticated,
         listener: (context, state) {
           if (state.isAuthenticated) {
-            context.go(AppRoutes.services);
+            context.go(AppRoutes.servicesPath);
             return;
           }
           state.apiFailureOrSuccess.fold(
@@ -100,7 +100,7 @@ class _LoginFormView extends StatelessWidget {
             const LoginCTA(),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () => context.push(AppRoutes.register),
+              onPressed: () => context.pushNamed(AppRoutes.register),
               style: TextButton.styleFrom(
                 foregroundColor: BaseColors.textGrey700,
               ),

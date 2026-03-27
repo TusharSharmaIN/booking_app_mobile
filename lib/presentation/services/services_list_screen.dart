@@ -26,7 +26,7 @@ class _ServicesListScreenState extends State<ServicesListScreen> {
   Future<void> _onLogout(BuildContext context) async {
     await getIt<AuthSession>().clearSession();
     if (context.mounted) {
-      context.go(AppRoutes.login);
+      context.go(AppRoutes.loginPath);
     }
   }
 
@@ -45,7 +45,7 @@ class _ServicesListScreenState extends State<ServicesListScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.list_alt, color: BaseColors.black),
-            onPressed: () => context.push(AppRoutes.myBookings),
+            onPressed: () => context.pushNamed(AppRoutes.myBookings),
           ),
           IconButton(
             icon: const Icon(Icons.logout, color: BaseColors.black),
@@ -126,7 +126,11 @@ class _ServiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
-      onTap: () => context.push(AppRoutes.serviceDetail, extra: service.id),
+      onTap: () => context.pushNamed(
+        AppRoutes.serviceDetail,
+        pathParameters: {AppRoutes.serviceId: service.id.getValue()},
+        extra: service.id.getValue(),
+      ),
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(

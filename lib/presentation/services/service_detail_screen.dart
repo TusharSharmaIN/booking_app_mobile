@@ -205,13 +205,16 @@ class _BookingCTA extends StatelessWidget {
           disabledBackgroundColor: BaseColors.grey300,
         ),
         onPressed: isActive
-            ? () => context.push(
-                '${AppRoutes.services}/${service.id.getValue()}/${AppRoutes.serviceBook}',
+            ? () => context.pushNamed(
+                AppRoutes.serviceBook,
+                pathParameters: {AppRoutes.serviceId: service.id.getValue()},
               )
             : null,
         child: Text(
           isActive ? 'Book Now' : 'Currently Unavailable',
-          style: BaseTextStyles.poppinsLargeBold,
+          style: BaseTextStyles.poppinsLargeBold.copyWith(
+            color: BaseColors.white,
+          ),
         ),
       ),
     );
