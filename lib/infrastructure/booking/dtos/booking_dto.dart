@@ -12,14 +12,15 @@ abstract class BookingDto with _$BookingDto {
   const BookingDto._();
 
   const factory BookingDto({
-    @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'userId') required String userId,
-    @JsonKey(name: 'serviceId') required String serviceId,
-    @JsonKey(name: 'scheduledAt') required DateTime scheduledAt,
-    @JsonKey(name: 'status') required String status,
-    @JsonKey(name: 'notes') required String notes,
-    @JsonKey(name: 'service') required ServiceDto service,
-    @JsonKey(name: 'user') required UserDto user,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'userId', defaultValue: '') required String userId,
+    @JsonKey(name: 'serviceId', defaultValue: '') required String serviceId,
+    @JsonKey(name: 'scheduledAt', defaultValue: '')
+    required String scheduledAt,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
+    @JsonKey(name: 'notes', defaultValue: '') required String notes,
+    @Default(ServiceDto.empty) @JsonKey(name: 'service') ServiceDto service,
+    @Default(UserDto.empty) @JsonKey(name: 'user') UserDto user,
   }) = _BookingDto;
 
   factory BookingDto.fromJson(Map<String, dynamic> json) =>
@@ -29,7 +30,7 @@ abstract class BookingDto with _$BookingDto {
     id: StringValue(id),
     userId: StringValue(userId),
     serviceId: StringValue(serviceId),
-    scheduledAt: DateTimeValue(scheduledAt.toIso8601String()),
+    scheduledAt: DateTimeValue(scheduledAt),
     status: StringValue(status),
     notes: StringValue(notes),
     service: service.toDomain(),
@@ -40,7 +41,7 @@ abstract class BookingDto with _$BookingDto {
     id: booking.id.getOrCrash(),
     userId: booking.userId.getOrCrash(),
     serviceId: booking.serviceId.getOrCrash(),
-    scheduledAt: booking.scheduledAt.dateTime,
+    scheduledAt: booking.scheduledAt.getOrCrash(),
     status: booking.status.getOrCrash(),
     notes: booking.notes.getOrCrash(),
     service: ServiceDto.fromDomain(booking.service),

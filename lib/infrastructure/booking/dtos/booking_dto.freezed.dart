@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BookingDto {
 
-@JsonKey(name: 'id') String get id;@JsonKey(name: 'userId') String get userId;@JsonKey(name: 'serviceId') String get serviceId;@JsonKey(name: 'scheduledAt') DateTime get scheduledAt;@JsonKey(name: 'status') String get status;@JsonKey(name: 'notes') String get notes;@JsonKey(name: 'service') ServiceDto get service;@JsonKey(name: 'user') UserDto get user;
+@JsonKey(name: 'id', defaultValue: '') String get id;@JsonKey(name: 'userId', defaultValue: '') String get userId;@JsonKey(name: 'serviceId', defaultValue: '') String get serviceId;@JsonKey(name: 'scheduledAt', defaultValue: '') String get scheduledAt;@JsonKey(name: 'status', defaultValue: '') String get status;@JsonKey(name: 'notes', defaultValue: '') String get notes;@JsonKey(name: 'service') ServiceDto get service;@JsonKey(name: 'user') UserDto get user;
 /// Create a copy of BookingDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $BookingDtoCopyWith<$Res>  {
   factory $BookingDtoCopyWith(BookingDto value, $Res Function(BookingDto) _then) = _$BookingDtoCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') String id,@JsonKey(name: 'userId') String userId,@JsonKey(name: 'serviceId') String serviceId,@JsonKey(name: 'scheduledAt') DateTime scheduledAt,@JsonKey(name: 'status') String status,@JsonKey(name: 'notes') String notes,@JsonKey(name: 'service') ServiceDto service,@JsonKey(name: 'user') UserDto user
+@JsonKey(name: 'id', defaultValue: '') String id,@JsonKey(name: 'userId', defaultValue: '') String userId,@JsonKey(name: 'serviceId', defaultValue: '') String serviceId,@JsonKey(name: 'scheduledAt', defaultValue: '') String scheduledAt,@JsonKey(name: 'status', defaultValue: '') String status,@JsonKey(name: 'notes', defaultValue: '') String notes,@JsonKey(name: 'service') ServiceDto service,@JsonKey(name: 'user') UserDto user
 });
 
 
@@ -71,7 +71,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,serviceId: null == serviceId ? _self.serviceId : serviceId // ignore: cast_nullable_to_non_nullable
 as String,scheduledAt: null == scheduledAt ? _self.scheduledAt : scheduledAt // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String,service: null == service ? _self.service : service // ignore: cast_nullable_to_non_nullable
 as ServiceDto,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
@@ -178,7 +178,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'userId')  String userId, @JsonKey(name: 'serviceId')  String serviceId, @JsonKey(name: 'scheduledAt')  DateTime scheduledAt, @JsonKey(name: 'status')  String status, @JsonKey(name: 'notes')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'userId', defaultValue: '')  String userId, @JsonKey(name: 'serviceId', defaultValue: '')  String serviceId, @JsonKey(name: 'scheduledAt', defaultValue: '')  String scheduledAt, @JsonKey(name: 'status', defaultValue: '')  String status, @JsonKey(name: 'notes', defaultValue: '')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BookingDto() when $default != null:
 return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.status,_that.notes,_that.service,_that.user);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'userId')  String userId, @JsonKey(name: 'serviceId')  String serviceId, @JsonKey(name: 'scheduledAt')  DateTime scheduledAt, @JsonKey(name: 'status')  String status, @JsonKey(name: 'notes')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'userId', defaultValue: '')  String userId, @JsonKey(name: 'serviceId', defaultValue: '')  String serviceId, @JsonKey(name: 'scheduledAt', defaultValue: '')  String scheduledAt, @JsonKey(name: 'status', defaultValue: '')  String status, @JsonKey(name: 'notes', defaultValue: '')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)  $default,) {final _that = this;
 switch (_that) {
 case _BookingDto():
 return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.status,_that.notes,_that.service,_that.user);case _:
@@ -219,7 +219,7 @@ return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.st
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'userId')  String userId, @JsonKey(name: 'serviceId')  String serviceId, @JsonKey(name: 'scheduledAt')  DateTime scheduledAt, @JsonKey(name: 'status')  String status, @JsonKey(name: 'notes')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'userId', defaultValue: '')  String userId, @JsonKey(name: 'serviceId', defaultValue: '')  String serviceId, @JsonKey(name: 'scheduledAt', defaultValue: '')  String scheduledAt, @JsonKey(name: 'status', defaultValue: '')  String status, @JsonKey(name: 'notes', defaultValue: '')  String notes, @JsonKey(name: 'service')  ServiceDto service, @JsonKey(name: 'user')  UserDto user)?  $default,) {final _that = this;
 switch (_that) {
 case _BookingDto() when $default != null:
 return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.status,_that.notes,_that.service,_that.user);case _:
@@ -234,15 +234,15 @@ return $default(_that.id,_that.userId,_that.serviceId,_that.scheduledAt,_that.st
 @JsonSerializable()
 
 class _BookingDto extends BookingDto {
-  const _BookingDto({@JsonKey(name: 'id') required this.id, @JsonKey(name: 'userId') required this.userId, @JsonKey(name: 'serviceId') required this.serviceId, @JsonKey(name: 'scheduledAt') required this.scheduledAt, @JsonKey(name: 'status') required this.status, @JsonKey(name: 'notes') required this.notes, @JsonKey(name: 'service') required this.service, @JsonKey(name: 'user') required this.user}): super._();
+  const _BookingDto({@JsonKey(name: 'id', defaultValue: '') required this.id, @JsonKey(name: 'userId', defaultValue: '') required this.userId, @JsonKey(name: 'serviceId', defaultValue: '') required this.serviceId, @JsonKey(name: 'scheduledAt', defaultValue: '') required this.scheduledAt, @JsonKey(name: 'status', defaultValue: '') required this.status, @JsonKey(name: 'notes', defaultValue: '') required this.notes, @JsonKey(name: 'service') this.service = ServiceDto.empty, @JsonKey(name: 'user') this.user = UserDto.empty}): super._();
   factory _BookingDto.fromJson(Map<String, dynamic> json) => _$BookingDtoFromJson(json);
 
-@override@JsonKey(name: 'id') final  String id;
-@override@JsonKey(name: 'userId') final  String userId;
-@override@JsonKey(name: 'serviceId') final  String serviceId;
-@override@JsonKey(name: 'scheduledAt') final  DateTime scheduledAt;
-@override@JsonKey(name: 'status') final  String status;
-@override@JsonKey(name: 'notes') final  String notes;
+@override@JsonKey(name: 'id', defaultValue: '') final  String id;
+@override@JsonKey(name: 'userId', defaultValue: '') final  String userId;
+@override@JsonKey(name: 'serviceId', defaultValue: '') final  String serviceId;
+@override@JsonKey(name: 'scheduledAt', defaultValue: '') final  String scheduledAt;
+@override@JsonKey(name: 'status', defaultValue: '') final  String status;
+@override@JsonKey(name: 'notes', defaultValue: '') final  String notes;
 @override@JsonKey(name: 'service') final  ServiceDto service;
 @override@JsonKey(name: 'user') final  UserDto user;
 
@@ -279,7 +279,7 @@ abstract mixin class _$BookingDtoCopyWith<$Res> implements $BookingDtoCopyWith<$
   factory _$BookingDtoCopyWith(_BookingDto value, $Res Function(_BookingDto) _then) = __$BookingDtoCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') String id,@JsonKey(name: 'userId') String userId,@JsonKey(name: 'serviceId') String serviceId,@JsonKey(name: 'scheduledAt') DateTime scheduledAt,@JsonKey(name: 'status') String status,@JsonKey(name: 'notes') String notes,@JsonKey(name: 'service') ServiceDto service,@JsonKey(name: 'user') UserDto user
+@JsonKey(name: 'id', defaultValue: '') String id,@JsonKey(name: 'userId', defaultValue: '') String userId,@JsonKey(name: 'serviceId', defaultValue: '') String serviceId,@JsonKey(name: 'scheduledAt', defaultValue: '') String scheduledAt,@JsonKey(name: 'status', defaultValue: '') String status,@JsonKey(name: 'notes', defaultValue: '') String notes,@JsonKey(name: 'service') ServiceDto service,@JsonKey(name: 'user') UserDto user
 });
 
 
@@ -302,7 +302,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,serviceId: null == serviceId ? _self.serviceId : serviceId // ignore: cast_nullable_to_non_nullable
 as String,scheduledAt: null == scheduledAt ? _self.scheduledAt : scheduledAt // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String,service: null == service ? _self.service : service // ignore: cast_nullable_to_non_nullable
 as ServiceDto,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable

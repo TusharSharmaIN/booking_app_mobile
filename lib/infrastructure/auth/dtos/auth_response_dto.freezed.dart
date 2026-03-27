@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthResponseDto {
 
-@JsonKey(name: 'token') String get token;@JsonKey(name: 'user') UserDto get user;
+@JsonKey(name: 'token', defaultValue: '') String get token;@JsonKey(name: 'user') UserDto get user;
 /// Create a copy of AuthResponseDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AuthResponseDtoCopyWith<$Res>  {
   factory $AuthResponseDtoCopyWith(AuthResponseDto value, $Res Function(AuthResponseDto) _then) = _$AuthResponseDtoCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'token') String token,@JsonKey(name: 'user') UserDto user
+@JsonKey(name: 'token', defaultValue: '') String token,@JsonKey(name: 'user') UserDto user
 });
 
 
@@ -163,7 +163,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'token')  String token, @JsonKey(name: 'user')  UserDto user)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'token', defaultValue: '')  String token, @JsonKey(name: 'user')  UserDto user)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthResponseDto() when $default != null:
 return $default(_that.token,_that.user);case _:
@@ -184,7 +184,7 @@ return $default(_that.token,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'token')  String token, @JsonKey(name: 'user')  UserDto user)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'token', defaultValue: '')  String token, @JsonKey(name: 'user')  UserDto user)  $default,) {final _that = this;
 switch (_that) {
 case _AuthResponseDto():
 return $default(_that.token,_that.user);case _:
@@ -204,7 +204,7 @@ return $default(_that.token,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'token')  String token, @JsonKey(name: 'user')  UserDto user)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'token', defaultValue: '')  String token, @JsonKey(name: 'user')  UserDto user)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthResponseDto() when $default != null:
 return $default(_that.token,_that.user);case _:
@@ -219,10 +219,10 @@ return $default(_that.token,_that.user);case _:
 @JsonSerializable()
 
 class _AuthResponseDto implements AuthResponseDto {
-  const _AuthResponseDto({@JsonKey(name: 'token') required this.token, @JsonKey(name: 'user') required this.user});
+  const _AuthResponseDto({@JsonKey(name: 'token', defaultValue: '') required this.token, @JsonKey(name: 'user') this.user = UserDto.empty});
   factory _AuthResponseDto.fromJson(Map<String, dynamic> json) => _$AuthResponseDtoFromJson(json);
 
-@override@JsonKey(name: 'token') final  String token;
+@override@JsonKey(name: 'token', defaultValue: '') final  String token;
 @override@JsonKey(name: 'user') final  UserDto user;
 
 /// Create a copy of AuthResponseDto
@@ -258,7 +258,7 @@ abstract mixin class _$AuthResponseDtoCopyWith<$Res> implements $AuthResponseDto
   factory _$AuthResponseDtoCopyWith(_AuthResponseDto value, $Res Function(_AuthResponseDto) _then) = __$AuthResponseDtoCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'token') String token,@JsonKey(name: 'user') UserDto user
+@JsonKey(name: 'token', defaultValue: '') String token,@JsonKey(name: 'user') UserDto user
 });
 
 
@@ -299,7 +299,7 @@ $UserDtoCopyWith<$Res> get user {
 /// @nodoc
 mixin _$AuthDataWrapper {
 
-@JsonKey(name: 'success') bool get success;@JsonKey(name: 'data') AuthResponseDto get data;
+@JsonKey(name: 'success', defaultValue: true) bool get success;@JsonKey(name: 'data') AuthResponseDto get data;
 /// Create a copy of AuthDataWrapper
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -332,7 +332,7 @@ abstract mixin class $AuthDataWrapperCopyWith<$Res>  {
   factory $AuthDataWrapperCopyWith(AuthDataWrapper value, $Res Function(AuthDataWrapper) _then) = _$AuthDataWrapperCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'success') bool success,@JsonKey(name: 'data') AuthResponseDto data
+@JsonKey(name: 'success', defaultValue: true) bool success,@JsonKey(name: 'data') AuthResponseDto data
 });
 
 
@@ -447,7 +447,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'success')  bool success, @JsonKey(name: 'data')  AuthResponseDto data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'success', defaultValue: true)  bool success, @JsonKey(name: 'data')  AuthResponseDto data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthDataWrapper() when $default != null:
 return $default(_that.success,_that.data);case _:
@@ -468,7 +468,7 @@ return $default(_that.success,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'success')  bool success, @JsonKey(name: 'data')  AuthResponseDto data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'success', defaultValue: true)  bool success, @JsonKey(name: 'data')  AuthResponseDto data)  $default,) {final _that = this;
 switch (_that) {
 case _AuthDataWrapper():
 return $default(_that.success,_that.data);case _:
@@ -488,7 +488,7 @@ return $default(_that.success,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'success')  bool success, @JsonKey(name: 'data')  AuthResponseDto data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'success', defaultValue: true)  bool success, @JsonKey(name: 'data')  AuthResponseDto data)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthDataWrapper() when $default != null:
 return $default(_that.success,_that.data);case _:
@@ -503,10 +503,10 @@ return $default(_that.success,_that.data);case _:
 @JsonSerializable()
 
 class _AuthDataWrapper implements AuthDataWrapper {
-  const _AuthDataWrapper({@JsonKey(name: 'success') required this.success, @JsonKey(name: 'data') required this.data});
+  const _AuthDataWrapper({@JsonKey(name: 'success', defaultValue: true) required this.success, @JsonKey(name: 'data') this.data = AuthResponseDto.empty});
   factory _AuthDataWrapper.fromJson(Map<String, dynamic> json) => _$AuthDataWrapperFromJson(json);
 
-@override@JsonKey(name: 'success') final  bool success;
+@override@JsonKey(name: 'success', defaultValue: true) final  bool success;
 @override@JsonKey(name: 'data') final  AuthResponseDto data;
 
 /// Create a copy of AuthDataWrapper
@@ -542,7 +542,7 @@ abstract mixin class _$AuthDataWrapperCopyWith<$Res> implements $AuthDataWrapper
   factory _$AuthDataWrapperCopyWith(_AuthDataWrapper value, $Res Function(_AuthDataWrapper) _then) = __$AuthDataWrapperCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'success') bool success,@JsonKey(name: 'data') AuthResponseDto data
+@JsonKey(name: 'success', defaultValue: true) bool success,@JsonKey(name: 'data') AuthResponseDto data
 });
 
 

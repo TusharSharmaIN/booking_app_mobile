@@ -38,6 +38,15 @@ abstract class ServiceDto with _$ServiceDto {
     duration: service.duration.getOrCrash(),
     isActive: service.isActive.getOrCrash(),
   );
+
+  static const empty = ServiceDto(
+    id: '',
+    name: '',
+    description: '',
+    price: 0,
+    duration: 0,
+    isActive: false,
+  );
 }
 
 @freezed

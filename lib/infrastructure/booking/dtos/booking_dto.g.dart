@@ -7,14 +7,18 @@ part of 'booking_dto.dart';
 // **************************************************************************
 
 _BookingDto _$BookingDtoFromJson(Map<String, dynamic> json) => _BookingDto(
-  id: json['id'] as String,
-  userId: json['userId'] as String,
-  serviceId: json['serviceId'] as String,
-  scheduledAt: DateTime.parse(json['scheduledAt'] as String),
-  status: json['status'] as String,
-  notes: json['notes'] as String,
-  service: ServiceDto.fromJson(json['service'] as Map<String, dynamic>),
-  user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
+  id: json['id'] as String? ?? '',
+  userId: json['userId'] as String? ?? '',
+  serviceId: json['serviceId'] as String? ?? '',
+  scheduledAt: json['scheduledAt'] as String? ?? '',
+  status: json['status'] as String? ?? '',
+  notes: json['notes'] as String? ?? '',
+  service: json['service'] == null
+      ? ServiceDto.empty
+      : ServiceDto.fromJson(json['service'] as Map<String, dynamic>),
+  user: json['user'] == null
+      ? UserDto.empty
+      : UserDto.fromJson(json['user'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$BookingDtoToJson(_BookingDto instance) =>
@@ -22,7 +26,7 @@ Map<String, dynamic> _$BookingDtoToJson(_BookingDto instance) =>
       'id': instance.id,
       'userId': instance.userId,
       'serviceId': instance.serviceId,
-      'scheduledAt': instance.scheduledAt.toIso8601String(),
+      'scheduledAt': instance.scheduledAt,
       'status': instance.status,
       'notes': instance.notes,
       'service': instance.service,

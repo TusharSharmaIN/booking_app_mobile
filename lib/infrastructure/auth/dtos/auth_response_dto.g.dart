@@ -8,8 +8,10 @@ part of 'auth_response_dto.dart';
 
 _AuthResponseDto _$AuthResponseDtoFromJson(Map<String, dynamic> json) =>
     _AuthResponseDto(
-      token: json['token'] as String,
-      user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      token: json['token'] as String? ?? '',
+      user: json['user'] == null
+          ? UserDto.empty
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AuthResponseDtoToJson(_AuthResponseDto instance) =>
@@ -17,8 +19,10 @@ Map<String, dynamic> _$AuthResponseDtoToJson(_AuthResponseDto instance) =>
 
 _AuthDataWrapper _$AuthDataWrapperFromJson(Map<String, dynamic> json) =>
     _AuthDataWrapper(
-      success: json['success'] as bool,
-      data: AuthResponseDto.fromJson(json['data'] as Map<String, dynamic>),
+      success: json['success'] as bool? ?? true,
+      data: json['data'] == null
+          ? AuthResponseDto.empty
+          : AuthResponseDto.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AuthDataWrapperToJson(_AuthDataWrapper instance) =>

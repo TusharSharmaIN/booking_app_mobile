@@ -10,10 +10,10 @@ abstract class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
-    @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'email') required String email,
-    @JsonKey(name: 'role') required String role,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'name', defaultValue: '') required String name,
+    @JsonKey(name: 'email', defaultValue: '') required String email,
+    @JsonKey(name: 'role', defaultValue: '') required String role,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
@@ -32,4 +32,6 @@ abstract class UserDto with _$UserDto {
     email: user.email.getOrCrash(),
     role: user.role.getOrCrash(),
   );
+
+  static const empty = UserDto(id: '', name: '', email: '', role: '');
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserDto {
 
-@JsonKey(name: 'id') String get id;@JsonKey(name: 'name') String get name;@JsonKey(name: 'email') String get email;@JsonKey(name: 'role') String get role;
+@JsonKey(name: 'id', defaultValue: '') String get id;@JsonKey(name: 'name', defaultValue: '') String get name;@JsonKey(name: 'email', defaultValue: '') String get email;@JsonKey(name: 'role', defaultValue: '') String get role;
 /// Create a copy of UserDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserDtoCopyWith<$Res>  {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) _then) = _$UserDtoCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') String id,@JsonKey(name: 'name') String name,@JsonKey(name: 'email') String email,@JsonKey(name: 'role') String role
+@JsonKey(name: 'id', defaultValue: '') String id,@JsonKey(name: 'name', defaultValue: '') String name,@JsonKey(name: 'email', defaultValue: '') String email,@JsonKey(name: 'role', defaultValue: '') String role
 });
 
 
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'email')  String email, @JsonKey(name: 'role')  String role)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'name', defaultValue: '')  String name, @JsonKey(name: 'email', defaultValue: '')  String email, @JsonKey(name: 'role', defaultValue: '')  String role)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserDto() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.role);case _:
@@ -177,7 +177,7 @@ return $default(_that.id,_that.name,_that.email,_that.role);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'email')  String email, @JsonKey(name: 'role')  String role)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'name', defaultValue: '')  String name, @JsonKey(name: 'email', defaultValue: '')  String email, @JsonKey(name: 'role', defaultValue: '')  String role)  $default,) {final _that = this;
 switch (_that) {
 case _UserDto():
 return $default(_that.id,_that.name,_that.email,_that.role);case _:
@@ -197,7 +197,7 @@ return $default(_that.id,_that.name,_that.email,_that.role);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'email')  String email, @JsonKey(name: 'role')  String role)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id', defaultValue: '')  String id, @JsonKey(name: 'name', defaultValue: '')  String name, @JsonKey(name: 'email', defaultValue: '')  String email, @JsonKey(name: 'role', defaultValue: '')  String role)?  $default,) {final _that = this;
 switch (_that) {
 case _UserDto() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.role);case _:
@@ -212,13 +212,13 @@ return $default(_that.id,_that.name,_that.email,_that.role);case _:
 @JsonSerializable()
 
 class _UserDto extends UserDto {
-  const _UserDto({@JsonKey(name: 'id') required this.id, @JsonKey(name: 'name') required this.name, @JsonKey(name: 'email') required this.email, @JsonKey(name: 'role') required this.role}): super._();
+  const _UserDto({@JsonKey(name: 'id', defaultValue: '') required this.id, @JsonKey(name: 'name', defaultValue: '') required this.name, @JsonKey(name: 'email', defaultValue: '') required this.email, @JsonKey(name: 'role', defaultValue: '') required this.role}): super._();
   factory _UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
 
-@override@JsonKey(name: 'id') final  String id;
-@override@JsonKey(name: 'name') final  String name;
-@override@JsonKey(name: 'email') final  String email;
-@override@JsonKey(name: 'role') final  String role;
+@override@JsonKey(name: 'id', defaultValue: '') final  String id;
+@override@JsonKey(name: 'name', defaultValue: '') final  String name;
+@override@JsonKey(name: 'email', defaultValue: '') final  String email;
+@override@JsonKey(name: 'role', defaultValue: '') final  String role;
 
 /// Create a copy of UserDto
 /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +253,7 @@ abstract mixin class _$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   factory _$UserDtoCopyWith(_UserDto value, $Res Function(_UserDto) _then) = __$UserDtoCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') String id,@JsonKey(name: 'name') String name,@JsonKey(name: 'email') String email,@JsonKey(name: 'role') String role
+@JsonKey(name: 'id', defaultValue: '') String id,@JsonKey(name: 'name', defaultValue: '') String name,@JsonKey(name: 'email', defaultValue: '') String email,@JsonKey(name: 'role', defaultValue: '') String role
 });
 
 
